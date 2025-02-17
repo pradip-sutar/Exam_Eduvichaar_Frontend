@@ -24,4 +24,4 @@
  # Expose port 3002 (instead of the default 3000)
  EXPOSE 3004
  # Command to run the React app
- CMD ["serve", "-s", "build", "-l", "3004"]
+ CMD ["npx", "serve", "-s", "build", "-l", "3004"]
