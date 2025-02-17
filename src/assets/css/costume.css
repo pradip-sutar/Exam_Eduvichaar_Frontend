@@ -1,0 +1,271 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    /* margin: 0;
+    padding: 0; */
+}
+
+.CreateDig{
+    font-size: 4rem ;
+  
+}
+.CreatePrice{
+    font-size: 3rem ;
+}
+.FAQKnow{
+    font-size: 3.5rem ;
+}
+
+.carosualStyle{
+    padding: 1rem 1rem 1rem;
+    background: var(--white) url(http://localhost:3000/static/media/footer_curve.1552773….svg) no-repeat -40px 0;
+    max-width: 1462px;
+    margin: 0 auto;
+    box-shadow: 0px 23px 46px 0px rgba(0, 0, 0, 0.11);
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+.no-hover{
+    color: inherit !important;
+    border-color: inherit !important;
+    background-color: transparent !important;
+}
+
+/* Container to hold Login and Dropdown */
+.OE-login-container {
+    position: relative;
+    display: inline-block;
+    z-index: 1050;
+  }
+  
+.OE-login-container:hover .OE-login-dropdown {
+    display: flex;
+    opacity: 1;
+    transform: translateY(5px);
+  }
+  
+  .OE-login-dropdown {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    padding: 5px 10px;
+    white-space: nowrap;
+    z-index: 1001; /* Higher than the banner */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
+    transform: translateY(-5px);
+    pointer-events: none;
+  }
+  
+  .OE-login-container:hover .OE-login-dropdown {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  
+  .OE-login-option {
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: block;
+    transition: background 0.3s, color 0.3s;
+    border-radius: 5px;
+    background: #f8f8f8;
+    margin: 5px 0;
+  }
+  
+  .OE-login-option:hover {
+    background: #257cfd;
+    color: white;
+    transform: scale(1.05);
+  }
+  
+  .profile-img {
+    width: 100px; 
+    height: 100px; 
+    object-fit: cover; 
+    border: 1px solid #dbdbdb; 
+  }
+
+
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+  }
+  
+  .popup-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+  
+  .animate-popup {
+    animation: popup-fade-in 0.3s ease-in-out;
+  }
+  
+  @keyframes popup-fade-in {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .Res-popup-container {
+    background: linear-gradient(135deg, #f0f4f8, #e4e9f1); /* Gradient background */
+    padding: 30px; /* More padding for a spacious look */
+    border-radius: 15px; /* Slightly more rounded corners */
+    width: 80%; /* Make it responsive */
+    max-width: 1000px; /* Set a max width */
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15); /* Subtle, larger shadow */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for effects */
+}
+
+/* .Res-popup-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2); 
+} */
+
+.Res-popup-container h2 {
+    font-size: 1.8rem; /* Larger font size for the title */
+    color: #333; /* Darker text for contrast */
+    margin-bottom: 20px; /* Space below the title */
+}
+
+.Res-popup-container p {
+    font-size: 1.1rem; /* Slightly larger font for text */
+    color: #555; /* Lighter color for text */
+}
+
+.Res-popup-container button {
+    background-color: #666cff; /* Primary button color */
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.Res-popup-container button:hover {
+    background-color: #5553e6; /* Darker shade on hover */
+}
+
+  
+
+  .Que-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 1050; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  .Que-popup-container {
+    max-width: 700px;
+    width: 90%;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 80vh;
+    position: relative; /* Keeps it inside the overlay */
+    z-index: 1051; /* Higher than the overlay */
+}
+
+  .Que-popup-container::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .Que-popup-container::-webkit-scrollbar-thumb {
+    background: #666cff;
+    border-radius: 5px;
+  }
+/* Styles for devices with max-width of 1025px */
+@media (max-width: 1025px) {
+   
+    
+}
+
+/* Styles for devices with max-width of 769px */
+@media (max-width: 769px) {
+    .CreateDig{
+        font-size: 2.5rem ;
+    } 
+    .CreatePrice{
+        font-size: 2.5rem ;
+    }
+    .FAQKnow{
+        font-size: 2.5rem ;
+    }
+
+    .Que-popup-container {
+      width: 95%;
+      max-height: 75vh;
+      padding: 15px;
+    }
+}
+
+/* Styles for devices with max-width of 426px */
+@media (max-width: 426px) {
+    .CreateDig{
+        font-size: 2rem ;
+    } 
+    .CreatePrice{
+        font-size: 2rem ;
+    }
+    .FAQKnow{
+        font-size: 2rem ;
+    }
+
+    .Que-popup-container {
+      width: 100%;
+      max-height: 70vh;
+      padding: 10px;
+    }
+  
+    .Que-popup-container h5 {
+      font-size: 16px;
+    }
+  
+    .Que-popup-container .form-control {
+      font-size: 14px;
+      padding: 5px;
+    }
+  
+    .Que-popup-container .btn {
+      font-size: 14px;
+      padding: 8px;
+    }
+}
+
+/* Styles for devices with max-width of 375px */
+@media (max-width: 375px) {
+   
+}
