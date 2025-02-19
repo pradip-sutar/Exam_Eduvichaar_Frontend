@@ -1,0 +1,105 @@
+.exam-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../public/assets/images/CanvaV/222222.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+  }
+  
+  .exam-card {
+    display: flex;
+    flex-direction: row;
+    width: 930px;
+    border-radius: 20px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    background: white;
+  }
+  
+  /* Left Side - Image */
+  .exam-left {
+    width: 50%;
+    background: linear-gradient(to right, #4689b1, #e3e3e3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+  }
+  
+  .exam-logo {
+    width: 100%;
+  }
+  
+  /* Right Side - Form */
+  .exam-right {
+    width: 50%;
+    padding: 40px;
+    background: #fff;
+    position: relative;
+  }
+  
+  /* Banner */
+  .exam-banner {
+    position: absolute;
+    top: 0;
+    left: -50px;
+    background: linear-gradient(to right, #000000, #2575fc);
+    padding: 10px 30px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 30px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .exam-container {
+        min-height: 100vh;
+        padding: 40px 15px;
+        background-size: contain; /* Adjusts the image for better visibility */
+      }
+    
+      .exam-card {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+      }
+  
+    .exam-left, .exam-right {
+      width: 100%;
+      height: auto;
+      padding: 20px;
+    }
+  
+    .exam-left {
+      min-height: 250px; /* Ensures left side is visible */
+    }
+  
+    .exam-banner {
+      left: 0;
+      width: 100%;
+      text-align: center;
+      border-radius: 0;
+    }
+  }
+  
+  @media (max-width: 425px) {
+    .exam-container {
+        padding: 20px 10px;
+        background-size: contain; /* Ensures it fully fits on mobile */
+      }
+  
+    .exam-right {
+      padding: 20px;
+    }
+  
+    .exam-title {
+      font-size: 18px;
+    }
+  }
+  
