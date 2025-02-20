@@ -1,0 +1,70 @@
+@media print { 
+    body {
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact !important; /* Ensure colors print correctly */
+        print-color-adjust: exact !important;
+    }
+
+    .certificate-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh; /* Make it full-page */
+        width: 100vw; 
+        margin: 0 auto !important; /* Ensure proper centering */
+        page-break-inside: avoid;
+    }
+
+    .certificate {
+        width: 1050px !important; /* Standard A4 width */
+        height: auto !important;
+        max-width: 100%;
+        padding: 20px !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-size: contain !important;
+        background-position: center !important;
+        position: relative;
+        border: none !important;
+    }
+
+    .cert-details {
+        display: flex !important;
+        justify-content: space-between !important;
+        width: 90% !important;
+        font-size: 16px !important;
+    }
+
+    .signatures {
+        display: flex !important;
+        justify-content: space-between !important;
+        width: 90% !important;
+        margin-top: 40px !important;
+        text-align: center !important;
+    }
+
+    .signatures div {
+        width: 120px !important;
+    }
+
+    .signatures hr {
+        width: 120px !important;
+        border-color: #000 !important;
+    }
+
+    .certificate img {
+        position: absolute !important;
+        right: 50px !important;
+        top: 100px !important;
+        width: 100px !important;
+        height: 100px !important;
+    }
+
+    /* Hides buttons in print */
+    .btn {
+        display: none !important;
+    }
+}

@@ -17,10 +17,21 @@ import Exam from './Components/Exam'
 import ExamLogin from './Components/ExamLogin/ExamLogin'
 import Hallticket from './Components/CertificateDownload/Hallticket'
 import Certificate from './Components/CertificateDownload/Certificate'
-
+import ExamRegistration from './Components/Login/ExamRegistration'
+import Answersheet from './Components/CertificateDownload/Answersheet'
+import MyAnswersheet from './Components/CertificateDownload/MyAnswersheet'
 import './App.css';
 
 function App() {
+  const sampleExamData = {
+    examName: "Mathematics Exam",
+    studentName: "John Doe",
+    studentId: "123456",
+    regdNo: "REG-789",
+    hallTicket: "HT-2024",
+    duration: "3 Hours",
+    year: "2024",
+  };
   return (
     <div className="App">
      
@@ -32,7 +43,10 @@ function App() {
         <Route element={<Exam />} path="/Exam"></Route>
         <Route element={<ExamLogin />} path="/exam-login"></Route>
         <Route element={<Hallticket />} path="/hall-ticket"></Route>
-        <Route element={<Certificate />} path="/Certificate"></Route>
+        <Route path="/" element={<ExamRegistration selectedRegExam={sampleExamData} />} />
+        <Route path="/certificate" element={<Certificate />} />
+        <Route path="/Answersheet" element={<Answersheet />} />
+        <Route path="/MyAnswersheet" element={<MyAnswersheet />} />
         
        
          

@@ -12,87 +12,104 @@ import {
 import { FaPlus, FaEdit } from "react-icons/fa";
 import "../../assets/css/costume.css";
 import { Link } from "react-router-dom";
-import { jsPDF } from "jspdf";
-import certificateBackground from "../../assets/image/certiBack.png";
-import logoImage from "../../assets/image/LogoPropVichaar.png";
-import sealImage from "../../assets/image/logoAdmin.png";
-const generateCertificate = (exam) => {
-  const doc = new jsPDF("landscape");
-  const pageWidth = doc.internal.pageSize.getWidth();
-  const pageHeight = doc.internal.pageSize.getHeight();
+// import { jsPDF } from "jspdf";
+// import certificateBackground from "../../assets/image/cert.png";
+// import logoImage from "../../assets/image/LogoPropVichaar.png";
+// import sealImage from "../../assets/image/logoAdmin.png";
+// const generateCertificate = (exam) => {
+//   const doc = new jsPDF("landscape");
+//   const pageWidth = doc.internal.pageSize.getWidth();
+//   const pageHeight = doc.internal.pageSize.getHeight();
 
-  doc.addImage(certificateBackground, "PNG", 0, 0, pageWidth, pageHeight);
- // Add Logo (Top Left)
-// const logoWidth = 100; 
-// const logoHeight = 100;
-// doc.addImage(logoImage, "PNG", 20, 1, logoWidth, logoHeight);
+//   // 1) Background
+//   doc.addImage(certificateBackground, "PNG", 0, 0, pageWidth, pageHeight);
 
-doc.setFont("helvetica", "bold");
-doc.setFontSize(28);
-doc.setTextColor(255, 0, 0);
-doc.text("CBL", 50, 30);
-doc.setTextColor(0, 0, 0);
-doc.text("Exam", 50, 40);
+//   doc.setFont("helvetica", "bold");
+//   doc.setFontSize(28);
 
-// Add Certificate Title (Top Right)
-doc.setFont("helvetica", "bold");
-doc.setFontSize(22);
-doc.text("CERTIFICATE", pageWidth - 90, 40);
-doc.setFontSize(16);
-doc.setTextColor(100);
-doc.text("OF APPRECIATION", pageWidth - 90, 55);
+ 
+//   doc.setTextColor(232, 0, 0);
+//   doc.text("Entrance", 40, 40);
 
-// Add Circular Seal (Top Right)
-const sealSize = 50; // Adjust size if needed
-doc.addImage(sealImage, "PNG", pageWidth - 80, 70, sealSize, sealSize);
+  
+//   doc.setTextColor(0, 0, 0);
+  
 
-// Add Certification Text
-doc.setFont("helvetica", "bold");
-doc.setFontSize(18);
-doc.setTextColor(50);
-doc.text("This to Certify that", 50, 90);
+ 
+//   doc.setFont("helvetica", "normal");
+//   doc.setFontSize(10);
+//   doc.setTextColor(80, 80, 80); 
+//   doc.text("Entrance Exam for Good Learning", 40, 50);
 
-// Candidate Name in Red
-doc.setFontSize(22);
-doc.setTextColor(200, 0, 0);
-doc.text(exam?.studentName||"Manasmita", 50, 110);
+  
+//   doc.setFont("helvetica", "bold");
+//   doc.setFontSize(18);
+//   doc.setTextColor(0, 0, 0);
+//   const certTitle = "CERTIFICATE";
+//   let textWidth = doc.getTextWidth(certTitle);
+//   doc.text(certTitle, pageWidth - textWidth - 40, 45);
 
-// Certification Completion Line
-doc.setFont("helvetica", "normal");
-doc.setFontSize(14);
-doc.setTextColor(0);
-doc.text(
-  "Has Attended Exam name on Date and Secured mark :40 outof 100 ",
-  50,
-  125
-);
-doc.setFont("helvetica", "normal");
-doc.setFontSize(14);
-doc.setTextColor(0);
-doc.text(
-  "the Professional designation of ",
-  150,
-  225
-);
+  
+//   doc.setFontSize(12);
+//   doc.setTextColor(100);
+//   const certSubtitle = "OF APPRECIATION";
+//   textWidth = doc.getTextWidth(certSubtitle);
+//   doc.text(certSubtitle, pageWidth - textWidth - 40, 60);
 
-// Certificate Title (Bold)
-doc.setFont("helvetica", "bold");
-doc.setFontSize(16);
-doc.text("wishing all the best", 50, 145);
+  
+//   const sealSize = 60;
+//   doc.addImage(sealImage, "PNG", pageWidth - sealSize - 40, 70, sealSize, sealSize);
+
+ 
+//   doc.setFont("helvetica", "normal");
+//   doc.setFontSize(14);
+//   doc.setTextColor(0, 0, 0);
+//   doc.text("This to Certify that", 40, 95);
+
+ 
+//   doc.setFont("helvetica", "bold");
+//   doc.setFontSize(20);
+//   doc.setTextColor(232, 0, 0);
+//   doc.text(exam?.studentName || "manasmita", 40, 110);
+
+  
+//   doc.setFont("helvetica", "normal");
+//   doc.setFontSize(12);
+//   doc.setTextColor(0, 0, 0);
+//   doc.text(
+//     "Has successfully completed all prescribed requirements and is hereby awarded",
+//     40,
+//     125
+//   );
+//   doc.text("the professional designation", 40, 132);
 
 
+//   doc.setFont("helvetica", "bold");
+//   doc.setFontSize(14);
+//   doc.text("Certified Lean Six Sigma Green Belt (CLSSGB)", 40, 148);
 
-// Certificate Number & Date
-doc.setFont("helvetica", "bold");
-doc.setFontSize(12);
-doc.setTextColor(0);
-doc.text(`Certificate Number: G-XXXXX`, 50, 180);
-doc.text(`Certification Date: 22-02-2023`, 180, 180);
+  
+//   doc.setFont("helvetica", "normal");
+//   doc.setFontSize(12);
+//   doc.text("The Exam was delivered via proctor", 40, 163);
 
-// Save the PDF
-doc.save(`Certificate_wfwdw.pdf`);
+ 
+//   doc.setFontSize(12);
+//   doc.text("Certificate Number: G-XXXXX", 40, 178);
+//   doc.text("Certification Date: DD Month, YYYY", 180, 178);
 
-};
+ 
+//   doc.setFontSize(10);
+//   doc.text("__________________________", 40, 220);
+//   doc.text("__________________________", 140, 220);
+
+//   doc.text("CEO", 60, 230);
+//   doc.text("Founder", 160, 230);
+
+
+//   doc.save("Certificate.pdf");
+
+// };
 
 const ExamRegistration = () => {
    
@@ -232,11 +249,15 @@ const ExamRegistration = () => {
       <td>{selectedRegExam.hallTicket}</td>
       <td>{selectedRegExam.duration}</td>
       <td>
-      <Button variant="primary" onClick={() => generateCertificate(selectedRegExam)}>
-                      Download
-                    </Button> | <a href="">Answersheet </a> | <a href="">My Answersheet</a>
+      <Link to={'/certificate'}><Button variant="primary" >
+      certificate
+                    </Button></Link> <Link to={'/Answersheet'}><Button variant="primary" >
+                    Answersheet
+                    </Button></Link>  <Link to={'/MyAnswersheet'}><Button variant="primary" >
+                    MyAnswersheet
+                    </Button></Link>
       </td>
-    </tr>
+    </tr>MyAnswersheet
     <tr style={{ height: "60px" }}>
       <td>{selectedRegExam.year}</td>
       <td>{selectedRegExam.examName}</td>

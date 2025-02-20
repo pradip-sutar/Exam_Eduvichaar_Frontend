@@ -1,11 +1,27 @@
 import React from "react";
 import { Container, Row, Col, Card, Image } from "react-bootstrap";
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
 
 const HallTicket = () => {
+  const handleDownload = () => {
+    const card = document.getElementById("hallTicketCard"); 
+
+    html2canvas(card, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgWidth = 190; 
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+      pdf.save("HallTicket.pdf");
+    });
+  };
+
   return (
-    <Container className="mt-4">
-      <Card className="p-4 border-1" style={{ maxWidth: "800px", margin: "auto" }}>
-        {/* Header Section */}
+    <Container className="mt-4 text-center">
+      <Card id="hallTicketCard" className="p-4 border-1" style={{ maxWidth: "800px", margin: "auto" }}>
+
         <Row className="text-center mb-3">
           <Col>
             <Image src="assets/images/logoAdmin.png" width={100} height={100} />
@@ -13,8 +29,7 @@ const HallTicket = () => {
             <hr />
           </Col>
         </Row>
-        
-        {/* Candidate Info Section */}
+
         <Row className="mb-3">
           <Col md={3} className="d-flex align-items-center justify-content-center">
             <div className="border p-2 text-center">
@@ -31,10 +46,9 @@ const HallTicket = () => {
             </Row>
           </Col>
         </Row>
-        
+
         <hr />
 
-        {/* Exam Details Section */}
         <Row>
           <Col md={6}><strong>Exam Date:</strong> 12-02-2024</Col>
           <Col md={6}><strong>Exam Time:</strong> 10:00 AM - 12:00 PM</Col>
@@ -42,6 +56,10 @@ const HallTicket = () => {
           <Col md={6}><strong>Total Marks:</strong> 100</Col>
         </Row>
       </Card>
+      
+      <button onClick={handleDownload} className="btn btn-primary mb-3 mt-3">
+        Download as PDF
+      </button>
     </Container>
   );
 };
