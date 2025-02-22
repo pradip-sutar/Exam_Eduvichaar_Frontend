@@ -2,8 +2,10 @@ import React from "react";
 import { Container, Row, Col, Card, Image } from "react-bootstrap";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const HallTicket = () => {
+  const navigate = useNavigate();
   const handleDownload = () => {
     const card = document.getElementById("hallTicketCard"); 
 
@@ -57,6 +59,8 @@ const HallTicket = () => {
         </Row>
       </Card>
       
+  <button className="btn btn-primary mb-3 mt-3 me-3" onClick={() => navigate(-1)}>Back</button>
+
       <button onClick={handleDownload} className="btn btn-primary mb-3 mt-3">
         Download as PDF
       </button>

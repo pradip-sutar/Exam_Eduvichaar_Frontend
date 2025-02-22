@@ -2,8 +2,9 @@ import React, { useRef, useState } from "react";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import './Cert.css'
-
+import { useNavigate } from "react-router-dom";
 const Certificate = () => {
+  const navigate = useNavigate();
   const certificateRef = useRef(null);
 
   const [candidateName] = useState("Ram");
@@ -24,6 +25,8 @@ const Certificate = () => {
 
   return (
     <div className="container mt-4 text-center m-auto">
+  <button className="btn btn-primary mb-3  me-3" onClick={() => navigate(-1)}>Back</button>
+
      <button onClick={handleDownload} className="btn btn-primary mb-3">
         Download as PDF
       </button>

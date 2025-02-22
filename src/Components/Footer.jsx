@@ -89,34 +89,40 @@ import React from 'react'
           <div className="row">
             <div className="col-md-4 col-12">
               <div className="footer-widget">
-                <h4 className="widget-title text-dark">Product</h4>
-                <ul className="list-unstyled icons-listing mb-0 widget-listing"  >
+                <h4 className="widget-title text-dark">Contact</h4>
+                <p className="footer-text">
+                Plot no. 288/3842(Sudha's), Nandan Vihar,Patia, Bhubaneswar,Odisha-751024.
+                </p>
+               
+                {/* <ul className="list-unstyled icons-listing mb-0 widget-listing"  >
                   <li><a href="javascript:">Prop Vichaar CRM</a></li>
                   <li><a href="javascript:">Prop Vichaar BMS</a></li>
                   <li><a href="javascript:">Prop Vichaar  Enterprize</a></li>
                   <li><a href="javascript:">Prop Vichaar 360</a></li>
-                </ul>
+                </ul> */}
               </div>
             </div>
             <div className="col-md-4 col-12">
               <div className="footer-widget">
-                <h4 className="widget-title text-dark">Support</h4>
-                <ul className="list-unstyled icons-listing mb-0 widget-listing">
+                <h4 className="widget-title text-dark">Phone Number</h4>
+                <div ><a href="tel:+1234567899"style={{color:'#f75d15'}}>(+91)  9090972227</a></div>
+                {/* <ul className="list-unstyled icons-listing mb-0 widget-listing">
                   <li><a href="javascript:">Success Story</a></li>
                   <li><a href="javascript:">FAQs</a></li>
                   <li><a href="javascript:">Testimonials</a></li>
-                </ul>
+                </ul> */}
               </div>
             </div>
             <div className="col-md-4 col-12">
               <div className="footer-widget">
-                <h4 className="widget-title text-dark">Services</h4>
-                <ul className="list-unstyled icons-listing mb-0 widget-listing">
+                <h4 className="widget-title text-dark">Email</h4>
+                <div><a href="https://mannatstudio.com/cdn-cgi/l/email-protection#5d3538312d1d2e382f383334293829733e3230"><span className="__cf_email__" data-cfemail="432b262f3303302631262d2a3726376d202c2e"style={{color:'#f75d15'}}>info@vichaarlab.com</span></a></div>
+                {/* <ul className="list-unstyled icons-listing mb-0 widget-listing">
                   <li><a href="javascript:">Technology</a></li>
                   <li><a href="javascript:">Integration</a></li>
                   <li><a href="javascript:">Industry</a></li>
                   <li><a href="javascript:">Maintenance</a></li>
-                </ul>
+                </ul> */}
               </div>
             </div>
           </div>

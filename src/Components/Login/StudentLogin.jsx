@@ -39,10 +39,9 @@ const StudentLogin = () => {
     setIsEditing(!isEditing);
   };
   const sections = {
-    "Basic Profile": <Student_BasicProfile/>,
-   
+    "Basic Profile": <Student_BasicProfile />,
+
     "Hall Ticket": (
-      
       <Card.Body>
         <Table striped bordered hover>
           <thead>
@@ -59,10 +58,10 @@ const StudentLogin = () => {
               <td>10-10-2024</td>
               <td>City Center</td>
               <td>
-                <Button variant="link"  onClick={() => navigate("/hall-ticket")}>
-                                 Download
-                              </Button>
-              {/* <Link to=""> <Button variant="link" >Download</Button></Link>  */}
+                <Button variant="link" onClick={() => navigate("/hall-ticket")}>
+                  Download
+                </Button>
+                {/* <Link to=""> <Button variant="link" >Download</Button></Link>  */}
               </td>
             </tr>
           </tbody>
@@ -71,19 +70,19 @@ const StudentLogin = () => {
     ),
     Result: (
       <Card.Body>
-        {/* <h1 className="mt-4">Result</h1> */}
-        <Table striped bordered hover>
+      <div style={{ width: "100%", overflowX: "auto" }}>
+        <Table striped bordered hover style={{ minWidth: "800px" }}>
           <thead>
             <tr>
-            <th>Year</th>
+              <th>Year</th>
               <th>Exam Name</th>
               <th>Date</th>
+              <th>Set</th>
               <th>Place</th>
               <th>Regd. No.</th>
               <th>Full Mark</th>
               <th>Secured Mark</th>
-              <th>Certificate </th>
-             
+              <th>Download</th>
             </tr>
           </thead>
           <tbody>
@@ -91,15 +90,35 @@ const StudentLogin = () => {
               <td>2024</td>
               <td>Sample Exam</td>
               <td>10-10-2024</td>
+              <td>A</td>
               <td>City Center</td>
               <td>100</td>
               <td>85</td>
               <td>56</td>
-              <td>Download</td>
+              <td>
+                <div style={{ display: "flex", gap: "3px", flexWrap: "wrap" }}>
+                  <Link to={"/certificate"}>
+                    <Button variant="primary" size="sm" style={{ fontSize: "11px", width: "90px" }}>
+                      Certificate
+                    </Button>
+                  </Link>
+                  <Link to={"/Answersheet"}>
+                    <Button variant="primary" size="sm" style={{ fontSize: "11px", width: "90px" }}>
+                      Ans_sheet
+                    </Button>
+                  </Link>
+                  <Link to={"/MyAnswersheet"}>
+                    <Button variant="primary" size="sm" style={{ fontSize: "10px", width: "90px", height: "25px" }}>
+                      MyAns_sheet
+                    </Button>
+                  </Link>
+                </div>
+              </td>
             </tr>
           </tbody>
         </Table>
-      </Card.Body>
+      </div>
+    </Card.Body>
     ),
   };
   return (
@@ -109,7 +128,7 @@ const StudentLogin = () => {
         <b className="screen-overlay" />
         <section className="breadcrumbs-page">
           <div className="container">
-            <h1>StudentLogin </h1>
+            <h1>Student Login </h1>
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">

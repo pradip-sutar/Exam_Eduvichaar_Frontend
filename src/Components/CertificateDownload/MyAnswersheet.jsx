@@ -2,9 +2,11 @@ import React, { useRef } from "react";
 import { Container, Card, Row, Col, Button, Image } from "react-bootstrap";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import { useNavigate } from "react-router-dom";
+
 const MyAnswersheet = () => {
   const myanswerSheetRef = useRef();
-
+  const navigate = useNavigate();
   const handleDownloadPDF = () => {
     const input = myanswerSheetRef.current;
 
@@ -183,6 +185,9 @@ const MyAnswersheet = () => {
         </div>
 
         <div className="text-center mt-4">
+
+  <button className="btn btn-primary mb-3 mt-3 me-3" onClick={() => navigate(-1)}>Back</button>
+
           <Button variant="primary" size="lg" onClick={handleDownloadPDF}>
             Download PDF
           </Button>

@@ -8,13 +8,13 @@ const BasicProfileExaminer = () => {
    const [showPopup, setShowPopup] = useState(false);
     const [formData, setFormData] = useState({
       name: "Mana",
-      regd: "564738920",
+      Licence_No: "564738920",
       dob: "12-02-2025",
       class: "900",
       phone_num: "90908765",
       email: "",
       school:"fty",
-      University:"bput",
+      Board:"bput",
       address:"nandan",
   
   
@@ -59,14 +59,14 @@ const BasicProfileExaminer = () => {
               </InputGroup>
             </Col>
             <Col md={6}>
-              <Form.Label>Registration ID.</Form.Label>
+              <Form.Label>Licence No.</Form.Label>
               <InputGroup>
                 <InputGroup.Text>
                   <FaUser />
                 </InputGroup.Text>
                 <Form.Control
-                  name="regd"
-                  placeholder="Registration No."
+                  name="Licence_No"
+                  placeholder="Licence_No."
                   value="564738920"
                   readOnly
                 />
@@ -74,7 +74,7 @@ const BasicProfileExaminer = () => {
             </Col>
           </Row>
 
-          <Row className="mb-3">
+          {/* <Row className="mb-3">
             <Col md={6}>
               <Form.Label>Date of Birth</Form.Label>
               <InputGroup>
@@ -103,33 +103,33 @@ const BasicProfileExaminer = () => {
                 />
               </InputGroup>
             </Col>
-          </Row>
+          </Row> */}
 
           <Row className="mb-3">
             <Col md={6}>
-              <Form.Label>School/University</Form.Label>
+              <Form.Label>Institue</Form.Label>
               <InputGroup>
                 <InputGroup.Text>
                   <FaSchool />
                 </InputGroup.Text>
                 <Form.Control
-                  name="school"
-                  placeholder=" School/University"
-                  value="board"
+                  name="Institue"
+                  placeholder=" Institue"
+                  value="Institue"
                   readOnly
                 />
               </InputGroup>
             </Col>
             <Col md={6}>
-              <Form.Label>Board/University</Form.Label>
+              <Form.Label>Board</Form.Label>
               <InputGroup>
                 <InputGroup.Text>
                   <FaUniversity />
                 </InputGroup.Text>
                 <Form.Control
-                  name="University"
-                  placeholder="Board/University"
-                  value="University"
+                  name="Board"
+                  placeholder="Board"
+                  value="Board"
                   readOnly
                 />
               </InputGroup>

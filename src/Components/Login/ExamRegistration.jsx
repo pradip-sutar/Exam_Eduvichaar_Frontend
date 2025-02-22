@@ -230,13 +230,13 @@ const ExamRegistration = () => {
   <thead style={{ backgroundColor: "#f8f9fa", fontWeight: "bold" }}>
     <tr>
       <th>Year</th>
-      <th>Exam Name</th>
+      <th>Date</th>
       <th>Student Name</th>
       <th>Student ID</th>
       <th>Regd. No.</th>
       <th>Hall Ticket</th>
       <th>Duration</th>
-      <th>Download</th>
+      {/* <th>Download</th> */}
     </tr>
   </thead>
   <tbody>
@@ -246,9 +246,11 @@ const ExamRegistration = () => {
       <td>{selectedRegExam.studentName}</td>
       <td>{selectedRegExam.studentId}</td>
       <td>{selectedRegExam.regdNo}</td>
-      <td>{selectedRegExam.hallTicket}</td>
+      <td><Link to={'/hall-ticket'}> 
+        Download
+        </Link></td>
       <td>{selectedRegExam.duration}</td>
-      <td>
+      {/* <td>
       <Link to={'/certificate'}><Button variant="primary" >
       certificate
                     </Button></Link> <Link to={'/Answersheet'}><Button variant="primary" >
@@ -256,9 +258,9 @@ const ExamRegistration = () => {
                     </Button></Link>  <Link to={'/MyAnswersheet'}><Button variant="primary" >
                     MyAnswersheet
                     </Button></Link>
-      </td>
-    </tr>MyAnswersheet
-    <tr style={{ height: "60px" }}>
+      </td> */}
+    </tr>
+    {/* <tr style={{ height: "60px" }}>
       <td>{selectedRegExam.year}</td>
       <td>{selectedRegExam.examName}</td>
       <td>{selectedRegExam.studentName}</td>
@@ -267,7 +269,7 @@ const ExamRegistration = () => {
       <td>{selectedRegExam.regdNo}</td>
       <td>{selectedRegExam.hallTicket}</td>
       <td>{selectedRegExam.duration}</td>
-    </tr>
+    </tr> */}
   </tbody>
 </Table>
 

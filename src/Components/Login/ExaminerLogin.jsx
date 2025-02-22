@@ -113,7 +113,7 @@ const ExaminerLogin = () => {
         {/* <b className="screen-overlay" /> */}
         <section className="breadcrumbs-page">
           <div className="container">
-            <h1>ExaminerLogin </h1>
+            <h1>Examiner Login </h1>
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">

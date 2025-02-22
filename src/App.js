@@ -20,6 +20,10 @@ import Certificate from './Components/CertificateDownload/Certificate'
 import ExamRegistration from './Components/Login/ExamRegistration'
 import Answersheet from './Components/CertificateDownload/Answersheet'
 import MyAnswersheet from './Components/CertificateDownload/MyAnswersheet'
+import Studentpagelogin from './Components/Signin/Studentpagelogin'
+import Studentsignup from './Components/Signin/Studentsignup'
+import Examinerpagelogin from './Components/Signin/Examinerpagelogin'
+import Examinersignup from './Components/Signin/Examinersignup'
 import './App.css';
 
 function App() {
@@ -47,6 +51,10 @@ function App() {
         <Route path="/certificate" element={<Certificate />} />
         <Route path="/Answersheet" element={<Answersheet />} />
         <Route path="/MyAnswersheet" element={<MyAnswersheet />} />
+        <Route path="/Studentpagelogin" element={<Studentpagelogin />} />
+        <Route path="/Studentsignup" element={<Studentsignup />} />
+        <Route path="/Examinerpagelogin" element={<Examinerpagelogin />} />
+        <Route path="/Examinersignup" element={<Examinersignup />} />
         
        
          

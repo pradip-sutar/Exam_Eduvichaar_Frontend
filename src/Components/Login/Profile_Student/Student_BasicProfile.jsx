@@ -8,8 +8,8 @@ const Student_BasicProfile = () => {
 
     const [showPopup, setShowPopup] = useState(false);
   const [formData, setFormData] = useState({
-    name: "Mana",
-    regd: "564738920",
+    name: "simta",
+    Student_id: "9090",
     dob: "12-02-2025",
     class: "900",
     phone_num: "90908765",
@@ -60,15 +60,15 @@ const Student_BasicProfile = () => {
                   </InputGroup>
                 </Col>
                 <Col md={6}>
-                  <Form.Label>Registration No.</Form.Label>
+                  <Form.Label>Student ID.</Form.Label>
                   <InputGroup>
                     <InputGroup.Text>
                       <FaUser />
                     </InputGroup.Text>
                     <Form.Control
-                      name="regd"
-                      placeholder="Registration No."
-                      value="564738920"
+                      name="Student_id"
+                      placeholder="Student id."
+                      value="56473898920"
                       readOnly
                     />
                   </InputGroup>

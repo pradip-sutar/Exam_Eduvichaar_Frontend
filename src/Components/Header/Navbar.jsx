@@ -164,12 +164,15 @@ const Navbar = () => {
 
                   {/* Hidden Dropdown - Shows on Hover */}
                   <div className="OE-login-dropdown">
-                    <Link to="/StudentLogin" className="OE-login-option">
+                    <Link to="/Studentpagelogin" className="OE-login-option">
                       Student
                     </Link>
-                    <Link to="/ExaminerLogin" className="OE-login-option">
+                    <Link to="/Examinerpagelogin" className="OE-login-option">
                       Examiner
                     </Link>
+                    {/* <Link to="/ExaminerLogin" className="OE-login-option">
+                      Examiner
+                    </Link> */}
                     
                   </div>
                 </div>

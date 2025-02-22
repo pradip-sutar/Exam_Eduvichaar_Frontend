@@ -22,7 +22,7 @@ const ExamResults = () => {
       year: "2024",
       examName: "Physics Exam",
       studentName: "John Doe",
-      regdNo: "12345",
+      studentid:"575667",
       fullMark: "100",
       secureMark: "85",
       certificate: "Issued",
@@ -46,7 +46,7 @@ const ExamResults = () => {
     year: "",
     examName: "",
     studentName: "",
-    regdNo: "",
+    studentid: "",
     fullMark: "",
     secureMark: "",
     certificate: "",
@@ -66,7 +66,7 @@ const ExamResults = () => {
       newExam.year &&
       newExam.examName &&
       newExam.studentName &&
-      newExam.regdNo &&
+      newExam.studentid &&
       newExam.fullMark &&
       newExam.secureMark &&
       newExam.certificate
@@ -130,12 +130,12 @@ const ExamResults = () => {
           <thead>
             <tr>
               <th>Year</th>
-              <th>Exam</th>
+              <th>Exam Name</th>
               <th>Student</th>
-              <th>Regd. No.</th>
-              <th>Hall Ticket</th>
+              <th>Student ID</th>
+              {/* <th>Hall Ticket</th> */}
               <th>Duration</th>
-              <th>Result</th>
+              <th>download</th>
             </tr>
           </thead>
           <tbody>
@@ -143,14 +143,31 @@ const ExamResults = () => {
               <td>3435</td>
               <td>{selectedExam.examName}</td>
               <td>{selectedExam.studentName}</td>
-              <td>{selectedExam.regdNo}</td>
-              <td> <Link to={'/hall-ticket'}> 
+              <td>{selectedExam.studentid}</td>
+              {/* <td> <Link to={'/hall-ticket'}> 
                                                Download
-                                           </Link></td>
+                                           </Link></td> */}
               <td>{selectedExam.fullMark}</td>
-              <td>{selectedExam.secureMark}</td>
+              <td> <div style={{ display: "flex", gap: "3px", flexWrap: "wrap" }}>
+                                <Link to={"/certificate"}>
+                                  <Button variant="primary"size="sm">
+                                    Certificate
+                                  </Button>
+                                </Link>
+                                <Link to={"/Answersheet"}>
+                                  <Button variant="primary"size="sm">
+                                    Ans_sheet
+                                  </Button>
+                                </Link>
+                                <Link to={"/MyAnswersheet"}>
+                                  <Button variant="primary" size="sm">
+                                    MyAns_sheet
+                                  </Button>
+                                </Link>
+                              </div></td>
+              {/* <td>{selectedExam.secureMark}</td> */}
             </tr>
-            <tr>
+            {/* <tr>
               <td>{selectedExam.year}</td>
               <td>{selectedExam.examName}</td>
               <td>{selectedExam.studentName}</td>
@@ -158,7 +175,7 @@ const ExamResults = () => {
               <td>{selectedExam.hallTicket}</td>
               <td>{selectedExam.fullMark}</td>
               <td>{selectedExam.secureMark}</td>
-            </tr>
+            </tr> */}
           </tbody>
         </Table>
       </div>
