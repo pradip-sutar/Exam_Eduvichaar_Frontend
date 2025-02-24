@@ -1,162 +1,107 @@
 import React, { useState } from "react";
-import Navbar from "../Header/Navbar";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  ListGroup,
-  Image,
-  Button,
-  Table,
-  Form,
-  InputGroup,
-  Modal,
-} from "react-bootstrap";
+import { Card, Button, ListGroup, Image } from "react-bootstrap";
+import { FaEdit } from "react-icons/fa";
+import "../../assets/css/costume.css";
 
 const ExamAnswer = () => {
-  // Create Exam
-  const [questions, setQuestions] = useState([
-    { id: 1, question: "", options: ["", "", "", ""], answer: "" },
+  const [savedRegExams, SetSavedRegExams] = useState([
+    { id: 1, year: "2024", examName: "Physics Exam", date: "12-02-1993", totalmark: "100", set: "SET A" },
+    { id: 2, year: "2023", examName: "Maths Exam", date: "12-02-2024", totalmark: "45", set: "SET B" },
   ]);
 
-  const handleAddQuestion = () => {
-    setQuestions([
-      ...questions,
-      {
-        id: questions.length + 1,
-        question: "",
-        options: ["", "", "", ""],
-        answer: "",
-      },
-    ]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedRegExam, SetSelectedRegExam] = useState(null);
+  const [selectedSet, setSelectedSet] = useState(null);
+  const [shuffledQuestions, setShuffledQuestions] = useState([]);
+
+  const questions = [
+    { question: "What is the first planet of the Solar system?", correctAnswer: "A", answerText: "No idea" },
+    { question: "What is the capital of France?", correctAnswer: "B", answerText: "Paris" },
+    { question: "Who wrote 'Hamlet'?", correctAnswer: "C", answerText: "Shakespeare" },
+  ];
+
+  const shuffleArray = (array) => {
+    return [...array].sort(() => Math.random() - 0.5);
   };
 
-  const handleDeleteQuestion = (id) => {
-    setQuestions(questions.filter((q) => q.id !== id));
+  const handleTabRegView = (exam) => {
+    SetSelectedRegExam(exam);
+    setShowPopup(true);
+    setSelectedSet(null); // Reset selected set
   };
 
-  const [showModal, setShowModal] = useState(false);
-  const [examData, setExamData] = useState([
-    {
-      examName: "Sample Exam",
-      examType: "Online",
-      purpose: "Certification",
-      company: "XYZ Ltd.",
-      date: "10-10-2024",
-      duration: "60 mins",
-    },
-  ]);
-  const [formData, setFormData] = useState({
-    examName: "",
-    examType: "",
-    purpose: "",
-    company: "",
-    date: "",
-    duration: "",
-  });
+  const handleClose = () => {
+    setShowPopup(false);
+    SetSelectedRegExam(null);
+    setSelectedSet(null);
+  };
 
-  const handleExamChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleSetClick = (setName) => {
+    setSelectedSet(setName);
+    setShuffledQuestions(shuffleArray(questions)); // Shuffle questions on set selection
   };
 
   return (
     <div>
       <Card.Body>
-        <Form>
-          <h5 className="mt-3">Add Question:</h5>
-          {questions.map((q, index) => (
-            <div key={q.id} className="border p-3 mb-3 position-relative">
-              <h5>Question {index + 1}:</h5>
-              <Form.Group className="mb-3">
-                <Form.Label>Q:</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter question"
-                  value={q.question}
-                  onChange={(e) =>
-                    handleExamChange(index, "question", e.target.value)
-                  }
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Options:</Form.Label>
-                {q.options.map((opt, optIndex) => (
-                  <Form.Control
-                    key={optIndex}
-                    type="text"
-                    placeholder={`Option ${optIndex + 1}`}
-                    className="mb-1"
-                    value={opt}
-                    onChange={(e) =>
-                      handleExamChange(index, "options", e.target.value)
-                    }
-                  />
-                ))}
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Answer:</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter correct answer"
-                  value={q.answer}
-                  onChange={(e) =>
-                    handleExamChange(index, "answer", e.target.value)
-                  }
-                />
-              </Form.Group>
-
-              {/* Delete Button */}
-              {questions.length > 1 && (
-                <Button
-                  variant="danger"
-                  className="mt-2"
-                  onClick={() => handleDeleteQuestion(q.id)}
-                >
-                  Delete
-                </Button>
-              )}
-            </div>
+        <ListGroup>
+          {savedRegExams.map((exam) => (
+            <ListGroup.Item key={exam.id} className="d-flex align-items-center container-fluid justify-content-between py-3">
+              <div className="d-flex align-items-center gap-3">
+                <Image src="assets/images/sidebar_widget_care.png" roundedCircle width={50} height={50} className="me-3" />
+                <div className="d-flex flex-column">
+                  <h6 className="mb-1 fw-bold">{exam.examName}</h6>
+                  <div className="d-flex flex-row gap-3">
+                    <p className="mb-0 text-muted">{exam.year}</p>
+                    <p className="mb-0 text-muted">{exam.date}</p>
+                    <p className="mb-0 text-muted">{exam.totalmark}</p>
+                    <p className="mb-0 text-muted">{exam.set}</p>
+                  </div>
+                </div>
+              </div>
+              <Button variant="warning" className="px-3 py-1 d-flex align-items-center gap-2" onClick={() => handleTabRegView(exam)}>
+                <FaEdit size={18} />
+                <span><strong>View</strong></span>
+              </Button>
+            </ListGroup.Item>
           ))}
+        </ListGroup>
 
-          <Button
-            variant="primary"
-            className="mb-3"
-            onClick={handleAddQuestion}
-          >
-            Add More
-          </Button>
+        {/* PopUp Modal */}
+        {showPopup && selectedRegExam && (
+          <div className="popup-overlay">
+            <div className="Res-popup-container animate-popup container-fluid p-3" style={{ maxWidth: "50vw", border: "1px solid black" }}>
+              
+              <div className="d-flex justify-content-start gap-3 my-3">
+                {["SET A", "SET B", "SET C", "SET D", "SET E"].map((setName) => (
+                  <Button key={setName} variant="outline-dark" className="px-4 py-2" onClick={() => handleSetClick(setName)}>
+                    {setName}
+                  </Button>
+                ))}
+              </div>
 
-          {/* Exam Summary */}
-          <Row>
-            <Col md={3}>
-              <Form.Group>
-                <Form.Label>Total Questions:</Form.Label>
-                <Form.Control type="number" />
-              </Form.Group>
-            </Col>
-            <Col md={3}>
-              <Form.Group>
-                <Form.Label>Right Answer:</Form.Label>
-                <Form.Control type="number" defaultValue={4} />
-              </Form.Group>
-            </Col>
-            <Col md={3}>
-              <Form.Group>
-                <Form.Label>Total Marks:</Form.Label>
-                <Form.Control type="number" />
-              </Form.Group>
-            </Col>
-            <Col md={3}>
-              <Form.Group>
-                <Form.Label>Wrong Answer:</Form.Label>
-                <Form.Control type="number" defaultValue={-1} />
-              </Form.Group>
-            </Col>
-          </Row>
-        </Form>
+              {/* Questions Section */}
+              <div className="border p-3" style={{ minHeight: "200px", border: "1px solid gray", borderRadius: "5px", background: "#f8f9fa", textAlign: "left" }}>
+                {selectedSet ? (
+                  <div>
+                    {shuffledQuestions.map((q, index) => (
+                      <div key={index} className="mb-3">
+                        <p className="mb-1 fw-bold">Q{index + 1}: {q.question}</p>
+                        <p className="mb-0"><strong>Ans:</strong> {q.correctAnswer} – {q.answerText}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <strong className="text-start d-block">Here the questions will show</strong>
+                )}
+              </div>
+
+              <div className="d-flex justify-content-end gap-2 mt-3">
+                <Button variant="secondary" onClick={handleClose}>Close</Button>
+              </div>
+            </div>
+          </div>
+        )}
       </Card.Body>
     </div>
   );

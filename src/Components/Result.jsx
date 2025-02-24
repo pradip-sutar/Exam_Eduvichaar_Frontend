@@ -51,6 +51,13 @@ const Result = ({ setResultRef }) => {
                           placeholder="Registration"
                         />
                       </div>
+                      <div className="mb-4">
+                        <input
+                          type="text"
+                          className="form-control bordered bottom-only"
+                          placeholder="Student ID"
+                        />
+                      </div>
                     
 
                       <div className="d-grid">
