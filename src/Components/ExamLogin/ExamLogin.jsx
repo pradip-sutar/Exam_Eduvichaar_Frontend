@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Row,
@@ -7,9 +7,11 @@ import {
   Image,
   Button,
   Form,
+  Modal,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./ExamLogin.css"; 
+import "./ExamLogin.css";
+import { useNavigate } from "react-router-dom";
 
 const ExamLogin = () => {
   const [questions] = useState([
@@ -213,11 +215,45 @@ const ExamLogin = () => {
       text: "What is the national animal of Bgh?",
       options: ["Lion", "Tiger", "Elephant", "Leopard"],
     },
-    
   ]);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [showModal, setShowModal] = useState(false); 
+  const navigate = useNavigate();
+
+  const enterFullScreen = () => {
+    const element = document.documentElement;
+    if (element.requestFullscreen) {
+      element.requestFullscreen().catch((err) => {
+        console.log(`Error attempting to enable full-screen mode: ${err.message}`);
+      });
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    }
+  };
+
+  const exitFullScreen = () => {
+    if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    }
+  };
+
+  useEffect(() => {
+    enterFullScreen();
+  }, []);
 
   const handleAnswerChange = (qId, option) => {
     setSelectedAnswers({ ...selectedAnswers, [qId]: option });
@@ -237,14 +273,24 @@ const ExamLogin = () => {
 
   const handleSubmit = () => {
     console.log("Submitted Answers:", selectedAnswers);
-    alert("Your answers have been submitted!");
+    setShowModal(true); 
+  };
+
+  const handleModalConfirm = () => {
+    setShowModal(false); 
+    exitFullScreen(); 
+    navigate("/Studentpagelogin"); 
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false); 
   };
 
   return (
     <>
-      <main id="body-content" className="bg-white">
-        <Container className="mt-4">
-          <Card className="p-5 mb-4">
+      <main id="body-content" className="bg-white" style={{ height: "95vh", margin: 0, padding: 0 }}>
+        <Container fluid className="mt-4 h-100">
+          <Card className="p-5 mb-4 h-100">
             <Row>
               <Col md={12} className="text-center">
                 <Image
@@ -279,10 +325,9 @@ const ExamLogin = () => {
             <hr />
 
             <Row>
-              {/* Left: Question & Option */}
               <Col md={8}>
                 <Card className="p-3 shadow-sm border-0 mb-3">
-                  <h5 className="mb-3 text-secondary fs-4">
+                  <h5 className="mb-3 text-secondary fs-2">
                     {currentQuestion + 1}. {questions[currentQuestion].text}
                   </h5>
                   <Form>
@@ -298,7 +343,7 @@ const ExamLogin = () => {
                         onChange={() =>
                           handleAnswerChange(questions[currentQuestion].id, option)
                         }
-                        className="mb-3 fs-5"
+                        className="mb-3 fs-2"
                       />
                     ))}
                   </Form>
@@ -323,19 +368,18 @@ const ExamLogin = () => {
                 </Card>
               </Col>
 
-              {/* Right: Number */}
               <Col md={4}>
                 <Card className="p-3 shadow-sm border-0 mb-3">
-                  <h5 className="mb-3 fs-3">Questions</h5>
-                  <div className="ExamLog-question-grid" style={{overflowY: 'scroll', maxHeight: '15rem'}}>
+                  <h5 className="mb-3 fs-2">Questions</h5>
+                  <div className="ExamLog-question-grid" style={{ overflowY: "scroll", maxHeight: "20rem" }}>
                     {questions.map((q, index) => (
                       <Button
                         key={q.id}
                         variant={
                           selectedAnswers[q.id]
-                            ? "success" // Change color if the question is answered
+                            ? "success"
                             : currentQuestion === index
-                            ? "primary" // Highlight the current question
+                            ? "primary"
                             : "outline-secondary"
                         }
                         onClick={() => setCurrentQuestion(index)}
@@ -349,13 +393,31 @@ const ExamLogin = () => {
               </Col>
             </Row>
 
-            <div className="mt-3 text-center">
+            <div className="mt-3 text-center fs-2">
               <Button variant="success" size="lg" onClick={handleSubmit}>
                 Submit
               </Button>
             </div>
           </Card>
         </Container>
+
+        {/* submission confirmation */}
+        <Modal show={showModal} onHide={handleModalClose} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Submission Confirmation</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Your answers have been submitted! Do you want to proceed to the login page?
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleModalClose}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={handleModalConfirm}>
+              OK
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </main>
     </>
   );

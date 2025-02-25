@@ -1,0 +1,35 @@
+@media (max-width: 576px) {
+.Que-popup-container {
+    width: 95%; /* Slightly wider on very small screens */
+    padding: 15px;
+  }
+
+  .d-flex.justify-content-end {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%; /* Full width for buttons on mobile */
+    margin-bottom: 5px;
+  }
+
+  .form-label {
+    font-size: 0.9rem; /* Slightly smaller labels on mobile */
+  }
+
+  .form-control, .input-group-text {
+    font-size: 0.9rem; /* Smaller text for inputs on mobile */
+  }
+}
+
+/* Ensure inputs and text aren’t cut off */
+.form-control, .input-group {
+  min-height: 38px; /* Consistent height for inputs */
+}
+
+/* Add padding to the popup content for better spacing */
+.Que-popup-container > * {
+  margin-bottom: 10px;
+}

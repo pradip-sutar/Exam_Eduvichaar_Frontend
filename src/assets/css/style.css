@@ -2146,7 +2146,7 @@ blockquote.light footer cite, .blockquote.light footer cite{
     font-weight: 700;
 }
 footer {
-	padding: 4rem 0 0;
+	padding: 2rem 0 0;
     background: var(--white) url(../../../public/assets/images/footer_curve.svg) no-repeat -40px 0;
     max-width: 1450px;
     margin: 0 auto;

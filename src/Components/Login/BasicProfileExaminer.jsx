@@ -3,7 +3,7 @@ import { Card, Button, Form, Row, Col, InputGroup } from "react-bootstrap";
 import { FaUser, FaPhone, FaEnvelope, FaSchool, FaBook, FaUniversity, FaCalendar, FaEdit } from "react-icons/fa";
 // import "../../../Components/"
 import "../../assets/css/costume.css"; 
-
+import "../Login/Profile_Student/StudentBasic.css"
 const BasicProfileExaminer = () => {
    const [showPopup, setShowPopup] = useState(false);
     const [formData, setFormData] = useState({
@@ -206,7 +206,7 @@ const BasicProfileExaminer = () => {
           <h4>Edit Profile</h4>
           <Form>
             <Row >
-              <Col md={6} sm={12} xs={12}>
+              <Col md={6} sm={12} xs={12} className="mb-3">
                 <Form.Group >
                   <Form.Label>Name</Form.Label>
                   <InputGroup>
@@ -225,9 +225,9 @@ const BasicProfileExaminer = () => {
                 </Form.Group>
               </Col>
 
-              <Col md={6} sm={12} xs={12}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Registration ID.</Form.Label>
+              <Col md={6} sm={12} xs={12} className="mb-3">
+                <Form.Group >
+                  <Form.Label>Licence No.</Form.Label>
                   <InputGroup>
                     <InputGroup.Text>
                       <FaUser />
@@ -243,8 +243,8 @@ const BasicProfileExaminer = () => {
                   </InputGroup>
                 </Form.Group>
               </Col>
-              <Col md={6} sm={12} xs={12}>
-                <Form.Group className="mb-3">
+              <Col md={6} sm={12} xs={12} className="mb-3">
+                <Form.Group >
                   <Form.Label>Date of Birth</Form.Label>
                   <InputGroup>
                     <InputGroup.Text>
@@ -262,8 +262,8 @@ const BasicProfileExaminer = () => {
                 </Form.Group>
               </Col>
 
-              <Col md={6} sm={12} xs={12}>
-                <Form.Group className="mb-3">
+              <Col md={6} sm={12} xs={12} className="mb-3">
+                <Form.Group >
                   <Form.Label>Class/Education</Form.Label>
                   <InputGroup>
                     <InputGroup.Text>
@@ -280,8 +280,8 @@ const BasicProfileExaminer = () => {
                   </InputGroup>
                 </Form.Group>
               </Col>
-              <Col md={6} sm={12} xs={12}>
-                <Form.Group className="mb-3">
+              <Col md={6} sm={12} xs={12} className="mb-3">
+                <Form.Group >
                   <Form.Label>School/University</Form.Label>
                   <InputGroup>
                     <InputGroup.Text>
@@ -298,8 +298,8 @@ const BasicProfileExaminer = () => {
                   </InputGroup>
                 </Form.Group>
               </Col>
-              <Col md={6} sm={12} xs={12}>
-                <Form.Group className="mb-3">
+              <Col md={6} sm={12} xs={12} className="mb-3">
+                <Form.Group >
                   <Form.Label>Phone Number</Form.Label>
                   <InputGroup>
                     <InputGroup.Text>
@@ -316,8 +316,8 @@ const BasicProfileExaminer = () => {
                   </InputGroup>
                 </Form.Group>
               </Col>
-              <Col md={6} sm={12} xs={12}>
-                <Form.Group className="mb-3">
+              <Col md={6} sm={12} xs={12} className="mb-3">
+                <Form.Group >
                   <Form.Label>Email</Form.Label>
                   <InputGroup>
                     <InputGroup.Text>
@@ -335,8 +335,8 @@ const BasicProfileExaminer = () => {
                 </Form.Group>
               </Col>
               
-              <Col md={6} sm={12} xs={12}>
-                <Form.Group className="mb-3">
+              <Col md={6} sm={12} xs={12} className="mb-3">
+                <Form.Group >
                   <Form.Label>Address</Form.Label>
                   <InputGroup>
                     <InputGroup.Text>
@@ -354,7 +354,7 @@ const BasicProfileExaminer = () => {
                 </Form.Group>
               </Col>
             </Row>
-            <div className="d-flex justify-content-end mt-3 ">
+            <div className="d-flex justify-content-end mt-3 gap-3">
               <Button
                 variant="secondary"
                 onClick={() => setShowPopup(false)}
@@ -369,6 +369,8 @@ const BasicProfileExaminer = () => {
         </div>
       </div>
     )}
+
+    
   </>
   )
 }
