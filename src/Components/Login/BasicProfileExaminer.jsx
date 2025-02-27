@@ -164,7 +164,7 @@ const BasicProfileExaminer = () => {
                 name="email"
                 placeholder="Enter Email"
                 className="form-input"
-                 value="@"
+                 value="sila546@gmal.com"
                 readOnly
               />
               </InputGroup>

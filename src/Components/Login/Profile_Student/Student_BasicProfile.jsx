@@ -142,6 +142,9 @@ const Student_BasicProfile = () => {
                     type="email"
                     name="email"
                     placeholder="Enter Email"
+                    value="sonali134@gmail.com"
+                    readOnly
+
                   />
                 </InputGroup>
               </Col>
