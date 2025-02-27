@@ -130,34 +130,29 @@ body {
   }
 
   .Res-popup-container {
-    background: linear-gradient(135deg, #f0f4f8, #e4e9f1); /* Gradient background */
-    padding: 30px; /* More padding for a spacious look */
-    border-radius: 15px; /* Slightly more rounded corners */
-    width: 80%; /* Make it responsive */
-    max-width: 1000px; /* Set a max width */
-    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15); /* Subtle, larger shadow */
+    background: linear-gradient(135deg, #f0f4f8, #e4e9f1); 
+    padding: 30px; 
+    border-radius: 15px; 
+    width: 80%; 
+    max-width: 1000px; 
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15); 
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for effects */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
-/* .Res-popup-container:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2); 
-} */
-
 .Res-popup-container h2 {
-    font-size: 1.8rem; /* Larger font size for the title */
-    color: #333; /* Darker text for contrast */
-    margin-bottom: 20px; /* Space below the title */
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px; 
 }
 
 .Res-popup-container p {
-    font-size: 1.1rem; /* Slightly larger font for text */
-    color: #555; /* Lighter color for text */
+    font-size: 1.1rem; 
+    color: #555;
 }
 
 .Res-popup-container button {
-    background-color: #666cff; /* Primary button color */
+    background-color: #666cff; 
     color: white;
     padding: 10px 20px;
     font-size: 1.1rem;
@@ -169,7 +164,7 @@ body {
 }
 
 .Res-popup-container button:hover {
-    background-color: #5553e6; /* Darker shade on hover */
+    background-color: #5553e6; 
 }
 
   
@@ -195,8 +190,8 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     max-height: 80vh;
-    position: relative; /* Keeps it inside the overlay */
-    z-index: 1051; /* Higher than the overlay */
+    position: relative; 
+    z-index: 1051; 
 }
 
   .Que-popup-container::-webkit-scrollbar {
@@ -207,10 +202,70 @@ body {
     background: #666cff;
     border-radius: 5px;
   }
-/* Styles for devices with max-width of 1025px */
+
+  .exam-list-container {
+    width: 100%;
+  }
+  
+  .exam-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .exam-list-item {
+    width: 100%;          
+    max-width: 60rem;     
+    flex-shrink: 0;       
+  }
+
+  .exam-list-container {
+    -webkit-overflow-scrolling: touch; 
+    scrollbar-width: thin; 
+  }
+  
+  /* Custom scrollbar styling for Webkit browsers */
+  .exam-list-container::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .exam-list-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+  
+  .exam-list-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+  
+  .exam-list-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  /* Ensure items don't wrap and maintain spacing */
+  .exam-list {
+    padding: 10px 0;
+  }
+  
+  .exam-list .list-group-item {
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .custom-AnswerPop-width{
+    max-width: 50rem;
+  }
 @media (max-width: 1025px) {
    
-    
+  .exam-list-container {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .exam-list {
+    display: flex;
+    flex-direction: column; /* Ye tickets ko ek ke niche ek arrange karega */
+    gap: 10px; /* Tickets ke beech thoda gap add karega */
+  }
 }
 
 /* Styles for devices with max-width of 769px */
@@ -231,6 +286,22 @@ body {
       padding: 15px;
     }
 
+    .exam-list-container {
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+     .exam-list {
+    flex-direction: column; /* Ensure small screens par bhi vertical rahe */
+  }
+  
+  .exam-list-item {
+    width: 60rem;       /* Fixed width for larger screens */
+  }
+
+  .custom-AnswerPop-width{
+    max-width: 80rem;
+  }
+  
     
 }
 
@@ -295,6 +366,19 @@ body {
       font-size: 0.75rem ;
       width: 124%;
       margin: 20px 0px;
+    }
+
+    .exam-list-container {
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .exam-list {
+      display: flex;
+      flex-direction: column;
+      min-width: 300px;
+    }
+    .exam-list-item {
+      width: 10rem !important;      /* Adjust padding if needed for smaller screens */
     }
    
 }

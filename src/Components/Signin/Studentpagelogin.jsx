@@ -1,4 +1,5 @@
 import React from 'react'
+import { useEffect } from 'react';
 import { Card, Form, Button, InputGroup } from "react-bootstrap";
 import { FaUser, FaIdBadge, FaTicketAlt, FaBook, FaSignInAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +7,26 @@ import "../Exam.css";
 const Studentpagelogin = () => {
 const navigate = useNavigate();
 
+// Prevent back navigation
+// Prevent back navigation
+useEffect(() => {
+  // Push current state to trap back attempts
+  window.history.pushState(null, null, window.location.pathname);
+
+  const handleBackButton = (event) => {
+    event.preventDefault();
+    // Stay on Studentpagelogin or redirect if needed
+    navigate("/Studentpagelogin", { replace: true });
+  };
+
+  window.addEventListener("popstate", handleBackButton);
+  return () => window.removeEventListener("popstate", handleBackButton);
+}, [navigate]);
+
+const handleLogin = () => {
+  // Assuming this navigates to another page after login
+  navigate("/StudentLogin", { replace: true });
+};
   return (
     <>
     

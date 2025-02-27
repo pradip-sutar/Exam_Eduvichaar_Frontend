@@ -44,12 +44,27 @@ const ExamAnswer = () => {
   return (
     <div>
       <Card.Body>
-        <ListGroup>
+      <div className="exam-list-container" style={{
+          overflowX: 'auto',
+          maxWidth: '100rem',
+         
+        }}>
+        <ListGroup className="exam-list" style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'nowrap',
+            // width: 'max-content' 
+          }}>
           {savedRegExams.map((exam) => (
-            <ListGroup.Item key={exam.id} className="d-flex align-items-center container-fluid justify-content-between py-3">
+            <ListGroup.Item key={exam.id} className="d-flex align-items-center container-fluid justify-content-between py-3 table-responsive" style={{ 
+              minWidth: '300px',    
+                  maxWidth: '800px',    
+                  width:'130%',
+                  flexShrink: 0     
+            }}>
               <div className="d-flex align-items-center gap-3">
                 <Image src="assets/images/sidebar_widget_care.png" roundedCircle width={50} height={50} className="me-3" />
-                <div className="d-flex flex-column">
+                <div style={{ flex: 1 }}>
                   <h6 className="mb-1 fw-bold">{exam.examName}</h6>
                   <div className="d-flex flex-row gap-3">
                     <p className="mb-0 text-muted">{exam.year}</p>
@@ -59,22 +74,24 @@ const ExamAnswer = () => {
                   </div>
                 </div>
               </div>
-              <Button variant="warning" className="px-3 py-1 d-flex align-items-center gap-2" onClick={() => handleTabRegView(exam)}>
-                <FaEdit size={18} />
-                <span><strong>View</strong></span>
+              <Button variant="warning" className="mx-4 px-3 py-1 d-flex align-items-center gap-2" onClick={() => handleTabRegView(exam)}>
+                
+                <span><FaEdit size={18} className="mx-2"/><strong>View</strong></span>
               </Button>
             </ListGroup.Item>
           ))}
         </ListGroup>
-
+</div>
         {/* PopUp Modal */}
         {showPopup && selectedRegExam && (
-          <div className="popup-overlay">
-            <div className="Res-popup-container animate-popup container-fluid p-3" style={{ maxWidth: "50vw", border: "1px solid black" }}>
+          <div className="popup-overlay ">
+            <div className="Res-popup-container animate-popup container-fluid p-3 table-responsive custom-AnswerPop-width" 
+            // style={{ maxWidth: "90vw",  }}
+            >
               
               <div className="d-flex justify-content-start gap-3 my-3">
                 {["SET A", "SET B", "SET C", "SET D", "SET E"].map((setName) => (
-                  <Button key={setName} variant="outline-dark" className="px-4 py-2" onClick={() => handleSetClick(setName)}>
+                  <Button key={setName} variant="outline-dark" className="px-1 py-1 px-lg-4 py-lg-2 px-md-4 py-md-2 " onClick={() => handleSetClick(setName)}>
                     {setName}
                   </Button>
                 ))}

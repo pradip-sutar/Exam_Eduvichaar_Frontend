@@ -186,7 +186,7 @@ const MyAnswersheet = () => {
 
         <div className="text-center mt-4">
 
-  <button className="btn btn-primary mb-3 mt-3 me-3" onClick={() => navigate(-1)}>Back</button>
+  <Button className="btn btn-primary mb-3 mt-3 me-3 " size="lg" onClick={() => navigate(-1)}>Back</Button>
 
           <Button variant="primary" size="lg" onClick={handleDownloadPDF}>
             Download PDF

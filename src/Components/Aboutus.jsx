@@ -31,11 +31,46 @@ const Aboutus = () => {
                   </h2>
                   <div className="form-wrap">
                     <div className="row">
-                      <div className="col-md-6 mb-4">
+                      {/* <div className="col-md-12 mb-4">
                         <input
                           type="text"
                           className="form-control bordered bottom-only"
                           placeholder="Exam Name"
+                        />
+                      </div> */}
+                      <div className="col-md-12 mb-4 position-relative ">
+  <select
+    className="form-control bordered bottom-only p-1"
+    style={{ color: "#626568", fontStyle: "normal", fontStyle:"italic" }}
+    defaultValue=""
+  >
+    <option value="" disabled> Exam Name</option>
+    <option value="exam1">Exam 1</option>
+    <option value="exam2">Exam 2</option>
+    <option value="exam3">Exam 3</option>
+  </select>
+  <span
+    className="dropdown-icon"
+    style={{
+      position: "absolute",
+      right: "20px",
+      top: "50%",
+      transform: "translateY(-50%)",
+      pointerEvents: "none", 
+    }}
+  >
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 4L6 8L10 4" stroke="grey" strokeWidth="2" fill="none" />
+    </svg>
+  </span>
+</div>
+                      
+                      
+                      <div className="col-md-6 mb-4">
+                        <input
+                          type="text"
+                          className="form-control bordered bottom-only"
+                          placeholder="Student ID"
                         />
                       </div>
                       <div className="col-md-6 mb-4">

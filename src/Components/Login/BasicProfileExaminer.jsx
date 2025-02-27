@@ -42,8 +42,8 @@ const BasicProfileExaminer = () => {
       </div>
       <fieldset>
         <Form>
-          <Row className="mb-3">
-            <Col md={6}>
+          <Row className="mb-3" >
+            <Col xs={12} md={6} className="mb-3 mb-md-0" >
               <Form.Label>Name</Form.Label>
               <InputGroup>
                 <InputGroup.Text>
@@ -58,7 +58,7 @@ const BasicProfileExaminer = () => {
                 />
               </InputGroup>
             </Col>
-            <Col md={6}>
+            <Col xs={12} md={6}>
               <Form.Label>Licence No.</Form.Label>
               <InputGroup>
                 <InputGroup.Text>
@@ -106,7 +106,7 @@ const BasicProfileExaminer = () => {
           </Row> */}
 
           <Row className="mb-3">
-            <Col md={6}>
+            <Col xs={12} md={6} className="mb-3 mb-md-0">
               <Form.Label>Institue</Form.Label>
               <InputGroup>
                 <InputGroup.Text>
@@ -120,7 +120,7 @@ const BasicProfileExaminer = () => {
                 />
               </InputGroup>
             </Col>
-            <Col md={6}>
+            <Col xs={12} md={6}>
               <Form.Label>Board</Form.Label>
               <InputGroup>
                 <InputGroup.Text>
@@ -137,7 +137,7 @@ const BasicProfileExaminer = () => {
           </Row>
 
           <Row className="mb-3">
-            <Col md={6}>
+            <Col xs={12} md={6} className="mb-3 mb-md-0">
               <Form.Label>Phone Number</Form.Label>
               <InputGroup>
                 <InputGroup.Text>
@@ -151,7 +151,7 @@ const BasicProfileExaminer = () => {
                 />
               </InputGroup>
             </Col>
-            <Col md={6}>
+            <Col xs={12} md={6}>
               <Form.Label>
                 Email
               </Form.Label>
@@ -354,7 +354,7 @@ const BasicProfileExaminer = () => {
                 </Form.Group>
               </Col>
             </Row>
-            <div className="d-flex justify-content-end mt-3 gap-3">
+            <div className="d-flex justify-content-end mt-3 gap-2">
               <Button
                 variant="secondary"
                 onClick={() => setShowPopup(false)}

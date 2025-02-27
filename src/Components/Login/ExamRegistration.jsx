@@ -177,11 +177,26 @@ const ExamRegistration = () => {
     return (
     <>
     <Card.Body>
-        <ListGroup>
+    <div className="exam-list-container" style={{
+          overflowX: 'auto',
+          maxWidth: '60rem',
+         
+        }}>
+        <ListGroup className="exam-list" style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'nowrap',
+            // width: 'max-content' 
+          }}>
           {savedRegExams.map((exam) => (
             <ListGroup.Item
               key={exam.id}
-              className="d-flex align-items-center  container-fluid justify-content-between py-3"
+              className="d-flex align-items-center  container-fluid justify-content-between py-3 table-responsive " style={{ 
+                minWidth: '300px',    
+                maxWidth: '800px',    
+                width:'130%',
+                flexShrink: 0       
+              }}
             >
               <div className="d-flex align-items-center gap-3">
                 <Image
@@ -191,7 +206,7 @@ const ExamRegistration = () => {
                   height={50}
                   className="me-3"
                 />
-                <div className="d-flex flex-column">
+                <div style={{ flex: 1 }}>
                   <h6 className="mb-1 fw-bold">{exam.examName}</h6>
                   <div className="d-flex flex-row gap-3">
                     <p className="mb-0 text-muted"> {exam.year}</p>
@@ -203,16 +218,16 @@ const ExamRegistration = () => {
                   </div>
                 </div>
               </div>
-              <Button variant="warning" className="px-3 py-1 d-flex align-items-center gap-2 " onClick={handleTabRegView}>
-                <FaEdit size={18} />
-                <span>
+              <Button variant="warning" className="mx-3 px-3 py-1 d-flex align-items-center gap-2 " onClick={handleTabRegView}>
+                
+                <span><FaEdit size={18} className="mx-2"/>
                   <strong>View</strong>
                 </span>
               </Button>
             </ListGroup.Item>
           ))}
         </ListGroup>
-
+</div>
         {/* PopUp Modal */}
         {showPopup && selectedRegExam && (
   <div className="popup-overlay">

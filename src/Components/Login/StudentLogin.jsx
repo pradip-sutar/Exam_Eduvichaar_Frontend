@@ -28,6 +28,7 @@ import {
 import Student_BasicProfile from "./Profile_Student/Student_BasicProfile";
 import Hallticket from "../CertificateDownload/Hallticket";
 import Student_ResultPage from "./Profile_Student/Student_ResultPage";
+import Student_HallTicket from "./Profile_Student/Student_HallTicket";
 import Footer from "../Footer";
 
 const StudentLogin = () => {
@@ -42,86 +43,10 @@ const StudentLogin = () => {
   const sections = {
     "Basic Profile": <Student_BasicProfile />,
 
-    "Hall Ticket": (
-      <Card.Body>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Exam Name</th>
-              <th>Date</th>
-              <th>Place</th>
-              <th>Hall Ticket</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Sample Exam</td>
-              <td>10-10-2024</td>
-              <td>City Center</td>
-              <td>
-                <Button variant="link" onClick={() => navigate("/hall-ticket")}>
-                  Download
-                </Button>
-                {/* <Link to=""> <Button variant="link" >Download</Button></Link>  */}
-              </td>
-            </tr>
-          </tbody>
-        </Table>
-      </Card.Body>
-    ),
-    Result: <Student_ResultPage/>
-    //  (
-    //   <Card.Body>
-    //   <div style={{ width: "100%", overflowX: "auto" }}>
-    //     <Table striped bordered hover style={{ minWidth: "800px" }}>
-    //       <thead>
-    //         <tr>
-    //           <th>Year</th>
-    //           <th>Exam Name</th>
-    //           <th>Date</th>
-    //           <th>Set</th>
-    //           <th>Place</th>
-    //           <th>Regd. No.</th>
-    //           <th>Full Mark</th>
-    //           <th>Secured Mark</th>
-    //           <th>Download</th>
-    //         </tr>
-    //       </thead>
-    //       <tbody>
-    //         <tr>
-    //           <td>2024</td>
-    //           <td>Sample Exam</td>
-    //           <td>10-10-2024</td>
-    //           <td>A</td>
-    //           <td>City Center</td>
-    //           <td>100</td>
-    //           <td>85</td>
-    //           <td>56</td>
-    //           <td>
-    //             <div style={{ display: "flex", gap: "3px", flexWrap: "wrap" }}>
-    //               <Link to={"/certificate"}>
-    //                 <Button variant="primary" size="sm" style={{ fontSize: "11px", width: "90px" }}>
-    //                   Certificate
-    //                 </Button>
-    //               </Link>
-    //               <Link to={"/Answersheet"}>
-    //                 <Button variant="primary" size="sm" style={{ fontSize: "11px", width: "90px" }}>
-    //                   Answer sheet
-    //                 </Button>
-    //               </Link>
-    //               <Link to={"/MyAnswersheet"}>
-    //                 <Button variant="primary" size="sm" style={{ fontSize: "10px", width: "90px", height: "25px" }}>
-    //                   My Answer sheet
-    //                 </Button>
-    //               </Link>
-    //             </div>
-    //           </td>
-    //         </tr>
-    //       </tbody>
-    //     </Table>
-    //   </div>
-    // </Card.Body>
-    // ),
+    "Hall Ticket": <Student_HallTicket/>,
+   
+    "Result": <Student_ResultPage/>
+    
   };
   return (
     <>

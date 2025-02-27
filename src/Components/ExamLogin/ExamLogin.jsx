@@ -220,6 +220,7 @@ const ExamLogin = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showModal, setShowModal] = useState(false); 
+  const [examActive, setExamActive] = useState(true); // New state to track exam status
   const navigate = useNavigate();
 
   const enterFullScreen = () => {
@@ -255,6 +256,30 @@ const ExamLogin = () => {
     enterFullScreen();
   }, []);
 
+  // Protect the page and enforce redirect when exam is inactive
+  useEffect(() => {
+    if (!examActive) {
+      navigate("/Studentpagelogin", { replace: true });
+    }
+  }, [examActive, navigate]);
+
+  // Robust back button handling
+  useEffect(() => {
+    // Push a dummy state to ensure we can intercept back navigation
+    window.history.pushState(null, null, window.location.pathname);
+
+    const handleBackButton = (event) => {
+      event.preventDefault();
+      // If exam is inactive or user tries to go back, redirect to login
+      navigate("/Studentpagelogin", { replace: true });
+    };
+
+    window.addEventListener("popstate", handleBackButton);
+
+    // Cleanup listener on unmount
+    return () => window.removeEventListener("popstate", handleBackButton);
+  }, [navigate]); // Removed examActive from dependencies to always redirect
+
   const handleAnswerChange = (qId, option) => {
     setSelectedAnswers({ ...selectedAnswers, [qId]: option });
   };
@@ -278,8 +303,11 @@ const ExamLogin = () => {
 
   const handleModalConfirm = () => {
     setShowModal(false); 
+    setExamActive(false); // Mark exam as inactive
     exitFullScreen(); 
-    navigate("/Studentpagelogin"); 
+    navigate("/Studentpagelogin", { replace: true });
+    // Push an extra state to trap any additional back attempts
+    window.history.pushState(null, null, "/Studentpagelogin");
   };
 
   const handleModalClose = () => {
@@ -305,12 +333,12 @@ const ExamLogin = () => {
             <hr />
             <Row className="align-items-center">
               <Col md={8}>
-                <h3 className="fs-2">CGL EXAM</h3>
-                <p className="fs-5">
+                <h3 className="fs-2  exam-header">CGL EXAM</h3>
+                <p className="fs-5 exam-description">
                   <strong>Description:</strong> Sample description of the exam.
                 </p>
               </Col>
-              <Col md={4} className="text-end">
+              <Col md={4} className="text-end exam-details">
                 <p className="fs-5">
                   <strong>Duration:</strong> 100 Mins.
                 </p>

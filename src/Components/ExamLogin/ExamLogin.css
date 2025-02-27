@@ -1,35 +1,123 @@
-
 .ExamLog-question-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
 
-  @media (max-width: 992px) {
-    .ExamLog-question-grid {
+/* Adjusting grid layout for medium screens */
+@media (max-width: 992px) {
+  .ExamLog-question-grid {
       grid-template-columns: repeat(4, 1fr);
-    }
   }
-  
+}
 
-  @media (max-width: 768px) {
-    .ExamLog-question-grid {
+/* Further reducing columns for smaller tablets */
+@media (max-width: 768px) {
+  .ExamLog-question-grid {
       grid-template-columns: repeat(3, 1fr);
-    }
   }
-  
+}
 
-  @media (max-width: 576px) {
-    .ExamLog-question-grid {
+/* Making it more compact for mobile screens */
+@media (max-width: 576px) {
+  .ExamLog-question-grid {
       grid-template-columns: repeat(2, 1fr);
-    }
   }
-  
+}
+
+/* Full-width buttons for extra small screens */
+@media (max-width: 400px) {
+  .ExamLog-question-grid {
+      grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* Adjust question button size for better touch interaction on small screens */
+.question-button {
+  font-size: 1rem;
+  height: 45px;
+  width: 45px;
+}
+
+@media (max-width: 576px) {
+  .question-button {
+      height: 40px;
+      width: 40px;
+      font-size: 0.9rem;
+  }
+}
+
+/* Ensure the main container takes full width in mobile view */
+@media (max-width: 576px) {
+  .ExamLog-question-grid {
+      overflow-x: auto;
+  }
 
   .question-button {
-    font-size: 1rem;
-    height: 45px;
-    width: 45px;
+      min-width: 40px;
   }
-  
+
+  main#body-content {
+      height: auto;
+  }
+}
+
+/* Adjust card padding for small screens */
+@media (max-width: 768px) {
+  .card {
+      padding: 1rem !important;
+  }
+}
+
+/* Ensure proper alignment of Exam Title and Details */
+@media (max-width: 576px) {
+  .text-end {
+      text-align: left !important;
+  }
+
+  .fs-2 {
+      font-size: 1.5rem !important;
+  }
+
+  .fs-5 {
+      font-size: 1rem !important;
+  }
+}
+
+/* Make the navigation buttons more accessible on mobile */
+@media (max-width: 576px) {
+  .d-flex.justify-content-between {
+      flex-direction: column;
+      gap: 0.5rem;
+  }
+
+  .d-flex.justify-content-between button {
+      width: 100%;
+  }
+}
+
+
+@media (max-width: 426px) {
+  .ExamLog-question-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 0.5rem;
+      padding-bottom: 0.5rem;
+  }
+
+  .question-button {
+      flex: 0 0 40px; /* Ensures buttons don’t shrink */
+  }
+  .exam-header {
+    text-align: center !important;
+}
+
+.exam-description {
+    text-align: center !important;
+}
+
+.exam-details {
+    text-align: center !important;
+}
+}

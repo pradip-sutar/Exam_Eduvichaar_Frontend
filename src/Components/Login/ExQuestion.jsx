@@ -213,44 +213,62 @@ const ExQuestion = () => {
             </span>
           </Button>
         </div>
-        <ListGroup>
-          {savedExams.map((exam) => (
-            <ListGroup.Item key={exam.id} className="d-flex flex-column py-3">
-              <div className="d-flex align-items-center gap-3">
-                <Image
-                  src={exam.image}
-                  roundedCircle
-                  width={50}
-                  height={50}
-                  className="me-3"
-                />
-                <div>
-                  <h6 className="mb-1 fw-bold">{exam.examName}</h6>
-                  <div className="d-flex flex-row gap-3 text-muted">
-                    <p className="mb-0">Exam Type : {exam.examType}</p> 
-                    <p className="mb-0">Year : {exam.year}</p>
-                    <p className="mb-0">Duration : {exam.duration}</p>
-                    <p className="mb-0">
-                      Sets - {Array.isArray(exam.sets) ? exam.sets.join(", ") : "N/A"}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="d-flex justify-content-end mt-3">
-              <Button
-                  variant="warning"
-                  className="px-3 py-1 d-flex align-items-center gap-2"
-                  onClick={() => handleViewClick(exam)}
-                >
-                  <FaEdit size={18} />
-                  <span>
-                    <strong>View</strong>
-                  </span>
-                </Button>
-              </div>
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
+        <div className="exam-list-container" style={{
+          overflowX: 'auto',
+          maxWidth: '60rem',
+         
+        }}>
+  <ListGroup className="exam-list" style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'nowrap',
+            width: 'max-content' 
+          }}>
+    {savedExams.map((exam) => (
+      <ListGroup.Item key={exam.id} className="d-flex flex-column py-3 list-group-item table-responsive"  style={{ 
+        minWidth: '300px',    
+                maxWidth: '800px',    
+                width:'130%',
+                flexShrink: 0       
+              }}>
+        <div className="d-flex align-items-center gap-3">
+          <Image
+            src={exam.image}
+            roundedCircle
+            width={50}
+            height={50}
+            className="me-3"
+          />
+          <div style={{ flex: 1 }}>
+            <h6 className="mb-1 fw-bold">{exam.examName}</h6>
+            <div className="d-flex flex-row gap-3 text-muted">
+              <p className="mb-0">Exam Type : {exam.examType}</p>
+              <p className="mb-0">Year : {exam.year}</p>
+              <p className="mb-0">Duration : {exam.duration}</p>
+              <p className="mb-0">
+                Sets - {Array.isArray(exam.sets) ? exam.sets.join(", ") : "N/A"}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="d-flex justify-content-end mt-3 " >
+          <Button
+            variant="warning"
+            
+            className="px-3 py-1 d-flex align-items-center gap-2"
+            onClick={() => handleViewClick(exam)}
+          >
+            
+            <span><FaEdit size={18}  className="mx-2"/>
+              <strong>View</strong>
+            </span>
+          </Button>
+        </div>
+      </ListGroup.Item>
+    ))}
+  </ListGroup>
+</div>
+
         {showQuestionForm && (
           <div className="Que-popup-overlay" onClick={handleClosePopup}>
             <div
@@ -260,13 +278,13 @@ const ExQuestion = () => {
               <h5 className="mt-3">Exam Details:</h5>
               <Form>
                 <Row className="mt-3 mb-3 d-flex align-items-center">
-                  <Col md={4}>
+                  <Col md={4} xs={12} className="mb-3 mb-md-0">
                     <Form.Group>
                       <Form.Label>Upload Image</Form.Label>
                       <Form.Control type="file" onChange={handleImageUpload} />
                     </Form.Group>
                   </Col>
-                  <Col md={4}>
+                  <Col md={4} className="mb-3 mb-md-0">
                     <Form.Group>
                       <Form.Label>Exam Name</Form.Label>
                       <Form.Control
@@ -277,7 +295,7 @@ const ExQuestion = () => {
                       />
                     </Form.Group>
                   </Col>
-                  <Col md={4}>
+                  <Col md={4} >
                     <Form.Group>
                       <Form.Label>Exam Type</Form.Label>
                       <Form.Control
@@ -297,7 +315,7 @@ const ExQuestion = () => {
                     { label: "Duration", name: "duration", type: "time" },
                     { label: "Date", name: "date", type: "date" },
                   ].map((field, idx) => (
-                    <Col md={4} key={idx}>
+                    <Col md={4} key={idx} className="mb-3 mb-md-0">
                       <Form.Group>
                         <Form.Label>{field.label}</Form.Label>
                         <Form.Control
@@ -309,7 +327,7 @@ const ExQuestion = () => {
                       </Form.Group>
                     </Col>
                   ))}
-                  <Col md={4}>
+                  <Col md={4} >
                     <Form.Group>
                       <Form.Label>Number of Sets</Form.Label>
                       <Form.Control
@@ -342,7 +360,7 @@ const ExQuestion = () => {
                 </Row>
               </Form>
               <div className="d-flex justify-content-end">
-                <Button variant="primary" onClick={handleTabSave} className="mt-4">
+                <Button variant="primary" onClick={handleTabSave} className="mb-3 mb-md-0">
                   Save
                 </Button>
               </div>
@@ -375,10 +393,10 @@ const ExQuestion = () => {
                   <div className="mb-3">
                     {q.options.map((option, optIndex) => (
                       <Row key={optIndex} className="align-items-center mb-2">
-                        <Col xs="auto">
+                        <Col xs="auto" className="mb-3 mb-md-0">
                           <strong>{String.fromCharCode(65 + optIndex)}.</strong>
                         </Col>
-                        <Col xs={6}>
+                        <Col xs={6} className="mb-3 mb-md-0">
                           <Form.Control
                             type="text"
                             value={option}
@@ -390,7 +408,7 @@ const ExQuestion = () => {
                             )}`}
                           />
                         </Col>
-                        <Col xs="auto">
+                        <Col xs="auto" className="mb-3 mb-md-0">
                           <Form.Check
                             type="radio"
                             name={`answer-${q.id}`}
@@ -419,7 +437,7 @@ const ExQuestion = () => {
                   { label: "Total Marks", defaultValue: "" },
                   { label: "Wrong Answer", defaultValue: -1 },
                 ].map((field, idx) => (
-                  <Col md={3} key={idx}>
+                  <Col md={3} key={idx} className="mb-3 mb-md-0">
                     <Form.Group>
                       <Form.Label>{field.label}:</Form.Label>
                       <Form.Control
@@ -444,7 +462,7 @@ const ExQuestion = () => {
     >
       <h5 className="mt-3">Exam Details: {selectedExam.examName}</h5>
       <Row className="mt-3 mb-3 d-flex align-items-center">
-        <Col md={2}>
+        <Col md={2} className="mb-3 mb-md-0">
           <Image
             src={selectedExam.image}
             roundedCircle
@@ -454,29 +472,29 @@ const ExQuestion = () => {
         </Col>
         <Col md={10}>
           <Row>
-            <Col md={4}>
+            <Col xs={12} md={4} className="mb-3 mb-md-0">
               <p><strong>Exam Type:</strong> {selectedExam.examType}</p>
             </Col>
-            <Col md={4}>
+            <Col xs={12} md={4} className="mb-3 mb-md-0">
               <p><strong>Purpose:</strong> {selectedExam.purpose}</p>
             </Col>
-            <Col md={4}>
+            <Col xs={12} md={4} className="mb-3 mb-md-0">
               <p><strong>Company:</strong> {selectedExam.company}</p>
             </Col>
           </Row>
           <Row>
-            <Col md={4}>
+            <Col xs={12} md={4} className="mb-3 mb-md-0">
               <p><strong>Year:</strong> {selectedExam.year}</p>
             </Col>
-            <Col md={4}>
+            <Col xs={12} md={4} className="mb-3 mb-md-0">
               <p><strong>Duration:</strong> {selectedExam.duration}</p>
             </Col>
-            <Col md={4}>
+            <Col xs={12} md={4} className="mb-3 mb-md-0">
               <p><strong>Date:</strong> {selectedExam.date}</p>
             </Col>
           </Row>
           <Row>
-            <Col md={4}>
+            <Col xs={12} md={4} className="mb-3 mb-md-0">
               <p><strong>Sets:</strong> {selectedExam.sets.join(", ")}</p>
             </Col>
           </Row>

@@ -120,12 +120,26 @@ const Exam_Compaies = () => {
               </span>
             </Button>
           </div>
-
-          <ListGroup>
+          <div className="exam-list-container" style={{
+          // overflowX: 'scroll',
+          maxWidth: '60rem',
+         
+        }}>
+          <ListGroup  className="exam-list" style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'nowrap',
+            width: '100%' 
+          }}>
             {companies.map((company) => (
               <ListGroup.Item
                 key={company.id}
-                className="d-flex align-items-center justify-content-between"
+                className="d-flex align-items-center justify-content-between py-3 table-responsive" style={{ 
+                  minWidth: '300px',    
+                  maxWidth: '800px',    
+                  width:'130%',
+                  flexShrink: 0       
+                }}
               >
                 <div className="d-flex align-items-center">
                   <Image
@@ -140,20 +154,24 @@ const Exam_Compaies = () => {
                     <p className="mb-0 text-muted">{company.info}</p>
                   </div>
                 </div>
-                <Button
+                <Button variant="warning" className=" px-3 py-1 d-flex align-items-center gap-2"  onClick={() => handleEditTab(company)}>
+                                
+                                <span><FaEdit size={18} className="mx-2"/><strong>View</strong></span>
+                              </Button>
+                {/* <Button
                   variant="warning"
                   className="px-3 py-1 d-flex align-items-center gap-2"
                   onClick={() => handleEditTab(company)}
                 >
-                  <FaEdit size={18} />
-                  <span>
+                  
+                  <span><FaEdit size={18} className="mx-2"/>
                     <strong>Edit</strong>
                   </span>
-                </Button>
+                </Button> */}
               </ListGroup.Item>
             ))}
           </ListGroup>
-
+</div>
           {/* PopUp Modal */}
           {showPopup && (
             <div className="popup-overlay">

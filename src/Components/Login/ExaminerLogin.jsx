@@ -103,7 +103,7 @@ const ExaminerLogin = () => {
      
       "Companies": <Exam_Compaies/>,
      "Results": <ExamResults />, 
-      " Registration":<ExamRegistration/>,
+      "Registration":<ExamRegistration/>,
       " Answers": <ExamAnswer/>
     };
   return (
@@ -142,7 +142,7 @@ const ExaminerLogin = () => {
           <Row>
             {/* Left Sidebar */}
             <Col md={3}>
-              <Card className="p-3 shadow-lg border-0 rounded-3 my-5">
+              <Card className="p-2 shadow-lg border-0 rounded-3 my-5">
                 <Card.Body>
                   <div className="text-center">
                     <Image
@@ -159,6 +159,7 @@ const ExaminerLogin = () => {
                         action
                         onClick={() => setActiveSection(section)}
                         className={activeSection === section ? "active" : ""}
+                        style={{fontSize: "15px"}}
                       >
                         {section}
                       </ListGroup.Item>
