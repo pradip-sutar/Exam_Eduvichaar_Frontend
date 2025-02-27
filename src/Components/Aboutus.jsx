@@ -13,7 +13,7 @@ const Aboutus = () => {
                   <div className="row">
                     <div className="col-md-9">
                       <div className="img-about">
-                        <img src="assets/images/co-working/23.svg" alt />
+                        <img src="assets/images/co-working/23.svg" style={{maxWidth:'85%'}} alt />
                         
                       </div>
                     </div>
@@ -29,7 +29,7 @@ const Aboutus = () => {
                       Registration Form{" "}
                     </strong>
                   </h2>
-                  <div className="form-wrap">
+                  <div className="form-wrap" style={{maxWidth:'85%'}}>
                     <div className="row">
                       {/* <div className="col-md-12 mb-4">
                         <input
@@ -40,7 +40,7 @@ const Aboutus = () => {
                       </div> */}
                       <div className="col-md-12 mb-4 position-relative ">
   <select
-    className="form-control bordered bottom-only p-1"
+    className="form-control bordered bottom-only p-3"
     style={{ color: "#626568", fontStyle: "normal", fontStyle:"italic" }}
     defaultValue=""
   >
@@ -66,104 +66,14 @@ const Aboutus = () => {
 </div>
                       
                       
-                      <div className="col-md-6 mb-4">
+                      <div className="col-md-12 mb-4">
                         <input
                           type="text"
                           className="form-control bordered bottom-only"
                           placeholder="Student ID"
                         />
                       </div>
-                      <div className="col-md-6 mb-4">
-                        <input
-                          type="text"
-                          className="form-control bordered bottom-only"
-                          placeholder="Year"
-                        />
-                      </div>
-                      <div className="col-md-6 mb-4">
-                        <input
-                          type="text"
-                          className="form-control bordered bottom-only"
-                          placeholder="Student Name"
-                        />
-                      </div>
-                      <div className="col-md-6 mb-4">
-                        <input
-                          type="text"
-                          className="form-control bordered bottom-only"
-                          placeholder="Phone Number"
-                        />
-                      </div>
-                      <div className="col-md-6 mb-4">
-                        <input
-                          type="Email"
-                          className="form-control bordered bottom-only"
-                          placeholder="Email ID "
-                        />
-                      </div>
-                      <div className="col-md-6 mb-4">
-                        <input
-                          type="text"
-                          className="form-control bordered bottom-only"
-                          placeholder="Parent's Name"
-                        />
-                      </div>
-                      <div className="col-md-6 mb-4">
-                        <input
-                          type="text"
-                          className="form-control bordered bottom-only"
-                          placeholder="Relation"
-                        />
-                      </div>
-                      <div className="col-md-6 mb-4">
-                        <input
-                          type="number"
-                          className="form-control bordered bottom-only"
-                          placeholder="Phone No."
-                        />
-                      </div>
-                      <div className="col-md-6 mb-4">
-                        <input
-                          type="text"
-                          className="form-control bordered bottom-only"
-                          placeholder="Exam Centre"
-                        />
-                      </div>
-                      <div className="col-md-6 mb-4">
-                        <input
-                          type="text"
-                          className="form-control bordered bottom-only"
-                          placeholder="Village / Address"
-                        />
-                      </div>
-                      <div className="col-md-6 mb-4">
-                        <input
-                          type="text"
-                          className="form-control bordered bottom-only"
-                          placeholder="City / District"
-                        />
-                      </div>
-                      <div className="col-md-6 mb-4">
-                        <input
-                          type="text"
-                          className="form-control bordered bottom-only"
-                          placeholder="State"
-                        />
-                      </div>
-                      <div className="col-md-6 mb-4">
-                        <input
-                          type="text"
-                          className="form-control bordered bottom-only"
-                          placeholder="Country"
-                        />
-                      </div>
-                      <div className="col-md-6 mb-4">
-                        <input
-                          type="number"
-                          className="form-control bordered bottom-only"
-                          placeholder="PIN / ZIP Code"
-                        />
-                      </div>
+                     
                     </div>
                     <div className="d-grid">
                       <button

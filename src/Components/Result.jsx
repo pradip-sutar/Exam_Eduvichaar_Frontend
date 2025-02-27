@@ -81,7 +81,7 @@ const Result = ({ setResultRef }) => {
                       <div className="img-about ">
                         <img src="assets/images/co-working/15.svg"   alt="About Us"
           className="img-fluid"
-          style={{ maxWidth: "100%", height: "auto" }}/>
+          style={{ maxWidth: "90%", height: "auto" }}/>
                       </div>
                     </div>
                   </div>
