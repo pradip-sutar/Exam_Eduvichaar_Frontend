@@ -5,14 +5,6 @@ import LogoCarousal from './LogoCarousal'
 import Aboutus from '../Aboutus'
 import Result from '../Result'
 import Exam from '../Exam'
-// import Whychooseus from '../Whychooseus'
-// import Whatweoffer from '../Whatweoffer'
-// import Features from '../Features'
-// import Pricingplan from '../Pricingplan'
-// import { Integration } from '../Integration'
-// import Faq from '../Faq'
-// import Realuserreviews from '../Realuserreviews'
-// import Needhelp from '../Needhelp'
 import Footer from '../Footer'
 const Home = () => {
   return (
@@ -23,14 +15,7 @@ const Home = () => {
     <Aboutus/>
     <Result/>
     {/* <Exam/> */}
-    {/* <Whychooseus/>
-    <Whatweoffer/>
-    <Features/>
-    <Pricingplan/>
-    <Integration/>
-    <Faq/>
-    <Realuserreviews/>
-    <Needhelp/> */}
+   
     <Footer/>
   </>
   )

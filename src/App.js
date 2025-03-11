@@ -9,6 +9,7 @@ import './assets/css/fonts/icomoon8a92.svg'
 import './assets/css/costume.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import '@mdi/font/css/materialdesignicons.min.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Components/Header/Home";
 import StudentLogin from './Components/Login/StudentLogin'
@@ -24,6 +25,7 @@ import Studentpagelogin from './Components/Signin/Studentpagelogin'
 import Studentsignup from './Components/Signin/Studentsignup'
 import Examinerpagelogin from './Components/Signin/Examinerpagelogin'
 import Examinersignup from './Components/Signin/Examinersignup'
+import AddNewQuestionFormPage from './Components/Login/AddNewQuestionFormPage'
 import './App.css';
 
 function App() {
@@ -55,6 +57,7 @@ function App() {
         <Route path="/Studentsignup" element={<Studentsignup />} />
         <Route path="/Examinerpagelogin" element={<Examinerpagelogin />} />
         <Route path="/Examinersignup" element={<Examinersignup />} />
+        <Route path="/add-new" element={<AddNewQuestionFormPage />} />
         
        
          

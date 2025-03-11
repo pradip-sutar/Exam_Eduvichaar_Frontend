@@ -58,7 +58,7 @@ const Footer = () => {
                     <div className="footer-widget p-2">
                       <h4 className="widget-title text-black">About Us</h4>
                       <p className="footer-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In urna lectus, mattis non accumsan in, tempor dictum neque.
+                      VichaarLab delivers innovative digital solutions, specializing in web, mobile apps, and ERP systems to empower your business growth.
                       </p>
                     </div>
                   </div>

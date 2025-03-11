@@ -97,14 +97,12 @@ const ExaminerLogin = () => {
 
   
     const sections = {
-      "Basic Profile": <BasicProfileExaminer/>,
-
-      "Create Exam": <ExQuestion/>,
-     
-      "Companies": <Exam_Compaies/>,
-     "Results": <ExamResults />, 
-      "Registration":<ExamRegistration/>,
-      " Answers": <ExamAnswer/>
+    "Basic Profile": <BasicProfileExaminer/>,
+    "Create Exam": <ExQuestion/>,
+    "Companies": <Exam_Compaies/>,
+    "Results": <ExamResults />, 
+    "Registration":<ExamRegistration/>,
+    "Answers": <ExamAnswer/>
     };
   return (
    <>

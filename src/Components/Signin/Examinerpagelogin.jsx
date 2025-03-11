@@ -1,11 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { Card, Form, Button, InputGroup } from "react-bootstrap";
 import { FaUser, FaIdBadge, FaTicketAlt, FaBook, FaSignInAlt } from "react-icons/fa";
 import { PiCertificateFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import "../Exam.css"; 
+import { postExaminerLogin } from '../Service/SignUp/apiExaminerLogin';
+
 const Examinerpagelogin = () => {
     const navigate = useNavigate();
+    
+        // State for form inputs
+        const [formData, setFormData] = useState({
+          student_or_license_id : '',
+          username :'',
+          password:'',
+        });
+
+        const [error, setError] = useState('');
+        
+            const handleChange = (e) => {
+                const { name, value } = e.target;
+                setFormData({ ...formData, [name]: value });
+            };
+
+          // Handle form submission
+              const handleSubmit = async (e) => {
+                 e.preventDefault();
+                 console.log("Form Data:", formData);
+
+                 try {
+                     const response = await postExaminerLogin(formData);
+                     console.log("API Response:", response);
+                     navigate("/ExaminerLogin");
+                 } catch (error) {
+                     console.error("Error during registration:", error);
+                 }
+             };
+
   return (
     <>
       <div className="exam-container">
@@ -20,14 +51,14 @@ const Examinerpagelogin = () => {
           <div className="exam-banner">Examiner</div>
 
           <h2 className="exam-title">Examiner Login</h2>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label className="fw-bold">Licence No.</Form.Label>
               <InputGroup>
                 <InputGroup.Text className="bg-light">
                   <PiCertificateFill />
                 </InputGroup.Text>
-                <Form.Control type="text" placeholder="Licence_no." />
+                <Form.Control type="text" name="student_or_license_id" value={formData.student_or_license_id} onChange={handleChange} />
               </InputGroup>
             </Form.Group>
 
@@ -37,7 +68,7 @@ const Examinerpagelogin = () => {
                 <InputGroup.Text className="bg-light">
                   <FaIdBadge />
                 </InputGroup.Text>
-                <Form.Control type="text" placeholder="use_name" />
+                <Form.Control type="text" name="username" value={formData.username} onChange={handleChange} />
               </InputGroup>
             </Form.Group>
 
@@ -47,14 +78,16 @@ const Examinerpagelogin = () => {
                 <InputGroup.Text className="bg-light">
                   <FaTicketAlt />
                 </InputGroup.Text>
-                <Form.Control type="password" placeholder="password" />
+                <Form.Control type="password" name="password" value={formData.password} onChange={handleChange} />
               </InputGroup>
             </Form.Group>
 
             <a href="#">Forget Password</a>
 
             <div className="d-grid my-2">
-              <Button className="exam-button" onClick={() => navigate("/ExaminerLogin")}>
+              <Button className="exam-button"  type="submit"
+              // onClick={() => navigate("/ExaminerLogin")}
+                >
                 <FaSignInAlt className="me-2" /> Login
               </Button>
             </div>

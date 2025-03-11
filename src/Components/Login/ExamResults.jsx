@@ -144,7 +144,7 @@ const ExamResults = () => {
       {/* Scrollable Table */}
       <div className="table-responsive">
         <Table className="exam-table">
-          <thead>
+          <thead  style={{ backgroundColor: "#f8f9fa", fontWeight: "bold" }}>
             <tr>
               <th>Year</th>
               <th>Exam Name</th>
@@ -156,7 +156,7 @@ const ExamResults = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr style={{ height: "60px" }}> 
               <td>3435</td>
               <td>{selectedExam.examName}</td>
               <td>{selectedExam.studentName}</td>
@@ -173,12 +173,12 @@ const ExamResults = () => {
                                 </Link>
                                 <Link to={"/Answersheet"}>
                                   <Button variant="primary"size="sm">
-                                    Ans_sheet
+                                    AnswerSheet
                                   </Button>
                                 </Link>
                                 <Link to={"/MyAnswersheet"}>
                                   <Button variant="primary" size="sm">
-                                    MyAns_sheet
+                                    MyAnswerSheet
                                   </Button>
                                 </Link>
                               </div></td>

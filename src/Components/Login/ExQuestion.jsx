@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Card, Image, Button, ListGroup, Form, Row, Col } from "react-bootstrap";
+import {
+  Card,
+  Image,
+  Button,
+  ListGroup,
+  Form,
+  Row,
+  Col,
+} from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
 import "../../assets/css/costume.css";
 
 const ExQuestion = () => {
+
+    const navigate = useNavigate();
   const [questions, setQuestions] = useState(() => {
     return JSON.parse(localStorage.getItem("questions")) || [];
   });
@@ -13,7 +24,7 @@ const ExQuestion = () => {
     return JSON.parse(localStorage.getItem("setQuestionsMap")) || {};
   });
 
-  const [shuffledQuestions, setShuffledQuestions] = useState(questions); 
+  const [shuffledQuestions, setShuffledQuestions] = useState(questions);
   const [showQuestionForm, setShowQuestionForm] = useState(false);
   const [numSets, setNumSets] = useState(1);
   const [selectedSet, setSelectedSet] = useState("SET A");
@@ -27,7 +38,6 @@ const ExQuestion = () => {
     date: "",
   });
 
-  // New state for view popup
   const [showViewPopup, setShowViewPopup] = useState(false);
   const [selectedExam, setSelectedExam] = useState(null);
 
@@ -46,8 +56,9 @@ const ExQuestion = () => {
 
   const handleSetChange = (newSet) => {
     setSelectedSet(newSet);
-    const savedSets = JSON.parse(localStorage.getItem("setQuestionsMap")) || {};
+    if (!selectedExam) {
 
+    const savedSets = JSON.parse(localStorage.getItem("setQuestionsMap")) || {};
     if (!savedSets[newSet]) {
       const shuffled = shuffleArray(questions);
       const updatedSets = { ...savedSets, [newSet]: shuffled };
@@ -57,7 +68,8 @@ const ExQuestion = () => {
     } else {
       setShuffledQuestions(savedSets[newSet]);
     }
-  };
+  }
+};
 
   const handleQuestionChange = (qIndex, newQuestion) => {
     const updatedQuestions = shuffledQuestions.map((q, index) =>
@@ -81,10 +93,10 @@ const ExQuestion = () => {
     setShuffledQuestions(updatedQuestions);
     setQuestions(updatedQuestions);
   };
-
-  
-
-  const handleAddNew = () => setShowQuestionForm(true);
+  const handleAddNew = () => {
+    navigate("/add-new"); // Navigate to the new page
+  };
+  // const handleAddNew = () => setShowQuestionForm(true);
   const handleClosePopup = () => setShowQuestionForm(false);
 
   const handleExamChange = (e) => {
@@ -99,7 +111,6 @@ const ExQuestion = () => {
     }
   };
 
-
   const handleAddQuestion = () => {
     const newQuestion = {
       id: Date.now(), // Using timestamp for unique ID
@@ -110,7 +121,7 @@ const ExQuestion = () => {
     setQuestions([...questions, newQuestion]);
     setShuffledQuestions([...shuffledQuestions, newQuestion]);
   };
- 
+
   const handleDeleteQuestion = (id) => {
     const updatedQuestions = questions.filter((q) => q.id !== id);
     setQuestions(updatedQuestions);
@@ -123,9 +134,11 @@ const ExQuestion = () => {
   //   localStorage.setItem("questions", JSON.stringify(updatedQuestions));
   // };
 
-  const handleAnswerSelect = (qIndex, selectedOption) => {
+  const handleAnswerSelect = (qIndex, optIndex) => {
     const updatedQuestions = shuffledQuestions.map((q, index) =>
-      index === qIndex ? { ...q, answer: selectedOption } : q
+      index === qIndex
+        ? { ...q, answer: String.fromCharCode(65 + optIndex) }
+        : q
     );
     setShuffledQuestions(updatedQuestions);
     setQuestions(updatedQuestions);
@@ -141,7 +154,6 @@ const ExQuestion = () => {
       return;
     }
 
-    
     // Validate that all questions have content
     const invalidQuestions = shuffledQuestions.some(
       (q) => !q.question || q.options.some((opt) => !opt) || !q.answer
@@ -151,23 +163,50 @@ const ExQuestion = () => {
       return;
     }
 
-    const setNames = Array.from({ length: numSets }, (_, index) =>
-      `SET ${String.fromCharCode(65 + index)}`
+    const setNames = Array.from(
+      { length: numSets },
+      (_, index) => `SET ${String.fromCharCode(65 + index)}`
     );
 
+    const questionSets = setNames.map((setName) => {
+      let questionsForSet =
+        setQuestionsMap[setName] || shuffleArray([...questions]);
+  
+      // Format the questions with question_id, question_text, and options as an array
+      const formattedQuestions = questionsForSet.map((q, index) => ({
+        question_id: index + 1,
+        question_text: q.question,
+        options: q.options,
+      }));
+  
+      // Build answers object mapping question_id to the correct option text
+      const answersForSet = questionsForSet.reduce((acc, q, index) => {
+        const answerIndex = q.answer.charCodeAt(0) - 65; // Convert "A"->0, "B"->1, etc.
+        acc[index + 1] = q.options[answerIndex];
+        return acc;
+      }, {});
+  
+      return {
+        set_name: setName,
+        questions: formattedQuestions,
+        answers: answersForSet,
+      };
+    });
+  
+    console.log(JSON.stringify({ question_sets: questionSets }, null, 2));
+  
     const newExam = {
       id: Date.now(),
       ...examData,
-      sets: setNames, // This is an array
+      sets: setNames, // Array of set names for view consistency
       image: examData.image || "assets/images/sidebar_widget_care.png",
-      questions: shuffledQuestions,
+      question_sets: questionSets, 
     };
-
+  
     const updatedExams = [...savedExams, newExam];
     setSavedExams(updatedExams);
     localStorage.setItem("savedExams", JSON.stringify(updatedExams));
 
-   
     setExamData({
       examName: "",
       examType: "",
@@ -181,6 +220,7 @@ const ExQuestion = () => {
     setQuestions([]);
     setShuffledQuestions([]);
     setNumSets(1);
+    setSetQuestionsMap({});
     handleClosePopup();
   };
 
@@ -190,6 +230,7 @@ const ExQuestion = () => {
 
   const handleViewClick = (exam) => {
     setSelectedExam(exam);
+    setSelectedSet(exam.sets[0] || "SET A");
     setShowViewPopup(true);
   };
 
@@ -213,63 +254,74 @@ const ExQuestion = () => {
             </span>
           </Button>
         </div>
-        <div className="exam-list-container" style={{
-          overflowX: 'auto',
-          maxWidth: '60rem',
-         
-        }}>
-  <ListGroup className="exam-list" style={{
-            display: 'flex',
-            flexDirection: 'column',
-            flexWrap: 'nowrap',
-            width: 'max-content' 
-          }}>
-    {savedExams.map((exam) => (
-      <ListGroup.Item key={exam.id} className="d-flex flex-column py-3 list-group-item table-responsive"  style={{ 
-        minWidth: '300px',    
-                maxWidth: '800px',    
-                width:'130%',
-                flexShrink: 0       
-              }}>
-        <div className="d-flex align-items-center gap-3">
-          <Image
-            src={exam.image}
-            roundedCircle
-            width={50}
-            height={50}
-            className="me-3"
-          />
-          <div style={{ flex: 1 }}>
-            <h6 className="mb-1 fw-bold">{exam.examName}</h6>
-            <div className="d-flex flex-row gap-3 text-muted">
-              <p className="mb-0">Exam Type : {exam.examType}</p>
-              <p className="mb-0">Year : {exam.year}</p>
-              <p className="mb-0">Duration : {exam.duration}</p>
-              <p className="mb-0">
-                Sets - {Array.isArray(exam.sets) ? exam.sets.join(", ") : "N/A"}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="d-flex justify-content-end mt-3 " >
-          <Button
-            variant="warning"
-            
-            className="px-3 py-1 d-flex align-items-center gap-2"
-            onClick={() => handleViewClick(exam)}
+        <div
+          className="exam-list-container"
+          style={{
+            overflowX: "auto",
+            maxWidth: "60rem",
+          }}
+        >
+          <ListGroup
+            className="exam-list"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              flexWrap: "nowrap",
+              width: "max-content",
+            }}
           >
-            
-            <span><FaEdit size={18}  className="mx-2"/>
-              <strong>View</strong>
-            </span>
-          </Button>
+            {savedExams.map((exam) => (
+              <ListGroup.Item
+                key={exam.id}
+                className="d-flex flex-column py-3 list-group-item table-responsive"
+                style={{
+                  minWidth: "300px",
+                  maxWidth: "800px",
+                  width: "130%",
+                  flexShrink: 0,
+                }}
+              >
+                <div className="d-flex align-items-center gap-3">
+                  <Image
+                    src={exam.image}
+                    roundedCircle
+                    width={50}
+                    height={50}
+                    className="me-3"
+                  />
+                  <div style={{ flex: 1 }}>
+                    <h6 className="mb-1 fw-bold">{exam.examName}</h6>
+                    <div className="d-flex flex-row gap-3 text-muted">
+                      <p className="mb-0">Exam Type : {exam.examType}</p>
+                      <p className="mb-0">Year : {exam.year}</p>
+                      <p className="mb-0">Duration : {exam.duration}</p>
+                      <p className="mb-0">
+                        Sets -{" "}
+                        {Array.isArray(exam.sets)
+                          ? exam.sets.join(", ")
+                          : "N/A"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="d-flex justify-content-end mt-3 ">
+                  <Button
+                    variant="warning"
+                    className="px-3 py-1 d-flex align-items-center gap-2"
+                    onClick={() => handleViewClick(exam)}
+                  >
+                    <span>
+                      <FaEdit size={18} className="mx-2" />
+                      <strong>View</strong>
+                    </span>
+                  </Button>
+                </div>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
         </div>
-      </ListGroup.Item>
-    ))}
-  </ListGroup>
-</div>
 
-        {showQuestionForm && (
+        {/* {showQuestionForm && (
           <div className="Que-popup-overlay" onClick={handleClosePopup}>
             <div
               className="Que-popup-container animate-popup"
@@ -295,7 +347,7 @@ const ExQuestion = () => {
                       />
                     </Form.Group>
                   </Col>
-                  <Col md={4} >
+                  <Col md={4}>
                     <Form.Group>
                       <Form.Label>Exam Type</Form.Label>
                       <Form.Control
@@ -327,7 +379,7 @@ const ExQuestion = () => {
                       </Form.Group>
                     </Col>
                   ))}
-                  <Col md={4} >
+                  <Col md={4}>
                     <Form.Group>
                       <Form.Label>Number of Sets</Form.Label>
                       <Form.Control
@@ -345,12 +397,15 @@ const ExQuestion = () => {
                     <Col md={1} key={index} className="my-2">
                       <Button
                         variant={
-                          selectedSet === `SET ${String.fromCharCode(65 + index)}`
+                          selectedSet ===
+                          `SET ${String.fromCharCode(65 + index)}`
                             ? "primary"
                             : "outline-primary"
                         }
                         onClick={() =>
-                          handleSetChange(`SET ${String.fromCharCode(65 + index)}`)
+                          handleSetChange(
+                            `SET ${String.fromCharCode(65 + index)}`
+                          )
                         }
                       >
                         {`SET ${String.fromCharCode(65 + index)}`}
@@ -360,16 +415,21 @@ const ExQuestion = () => {
                 </Row>
               </Form>
               <div className="d-flex justify-content-end">
-                <Button variant="primary" onClick={handleTabSave} className="mb-3 mb-md-0">
+                <Button
+                  variant="primary"
+                  onClick={handleTabSave}
+                  className="mb-3 mb-md-0"
+                >
                   Save
                 </Button>
               </div>
               <hr />
               <h5 className="mt-3">Add Question:</h5>
               {shuffledQuestions.length === 0 && (
-                <p>No questions added yet. Click "Add Another Question" to start.</p>
+                <p>
+                  No questions added yet. Click "Add Another Question" to start.
+                </p>
               )}
-
 
               {shuffledQuestions.map((q, index) => (
                 <div key={q.id} className="border p-3 mb-3 rounded">
@@ -401,7 +461,11 @@ const ExQuestion = () => {
                             type="text"
                             value={option}
                             onChange={(e) =>
-                              handleOptionChange(index, optIndex, e.target.value)
+                              handleOptionChange(
+                                index,
+                                optIndex,
+                                e.target.value
+                              )
                             }
                             placeholder={`Option ${String.fromCharCode(
                               65 + optIndex
@@ -412,8 +476,10 @@ const ExQuestion = () => {
                           <Form.Check
                             type="radio"
                             name={`answer-${q.id}`}
-                            checked={q.answer === option}
-                            onChange={() => handleAnswerSelect(index, option)}
+                            checked={
+                              q.answer === String.fromCharCode(65 + optIndex)
+                            } 
+                            onChange={() => handleAnswerSelect(index, optIndex)}
                           />
                         </Col>
                       </Row>
@@ -450,15 +516,19 @@ const ExQuestion = () => {
               </Row>
             </div>
           </div>
-        )}
+        )} */}
 
-        {/* View Exam Popup */}
-{showViewPopup && selectedExam && (
+        {/* View-Exam Popup */}
+        {showViewPopup && selectedExam && (
   <div className="Que-popup-overlay" onClick={handleCloseViewPopup}>
-     <div
+    <div
       className="Que-popup-container animate-popup"
       onClick={(e) => e.stopPropagation()}
-      style={{ padding: "20px", background: "#f9f9f9", borderRadius: "10px" }}
+      style={{
+        padding: "20px",
+        background: "#f9f9f9",
+        borderRadius: "10px",
+      }}
     >
       <h5 className="mt-3">Exam Details: {selectedExam.examName}</h5>
       <Row className="mt-3 mb-3 d-flex align-items-center">
@@ -504,13 +574,13 @@ const ExQuestion = () => {
       <hr />
       <h5 className="mt-3">Questions:</h5>
 
-      {/* Dynamic Set Buttons */}
+      
       <div className="d-flex gap-2 mb-3" style={{ flexWrap: "wrap" }}>
-        {selectedExam.sets.map((setName, index) => (
+        {selectedExam.sets.map((setName) => (
           <Button
             key={setName}
             variant={selectedSet === setName ? "primary" : "outline-primary"}
-            onClick={() => handleSetChange(setName)}
+            onClick={() => setSelectedSet(setName)} 
             style={{ marginBottom: "10px" }}
           >
             {setName}
@@ -518,37 +588,57 @@ const ExQuestion = () => {
         ))}
       </div>
 
-      {/* Display Questions for the Selected Set */}
-      <div className="questions-container" style={{ border: "1px solid #ccc", background: "#fff", padding: "15px", borderRadius: "5px" }}>
-  {selectedExam.questions.length === 0 ? (
-    <p>No questions available.</p>
-  ) : (
-    shuffledQuestions.map((q, index) => (
-      <div key={q.id} className="mb-3">
-        <p style={{ marginBottom: "10px" }}>
-          <strong>Q {index + 1}:</strong> {q.question}
-        </p>
-        <div className="d-flex flex-column" style={{ gap: "5px" }}>
-          {q.options.map((option, optIndex) => (
-            <div key={optIndex} className="d-flex align-items-center" style={{ gap: "15px" }}>
-            
-              <strong>{String.fromCharCode(65 + optIndex)}.</strong>
-              <span style={{ marginLeft: "5px" }}>{option}</span>
-              <Form.Check
-                type="radio"
-                name={`answer-${q.id}`}
-                checked={q.answer === option}
-                readOnly
-                disabled
-                style={{ margin: 0 }}
-              />
-            </div>
-          ))}
-        </div>
+      {/* show Questions for the Selected Set */}
+      <div
+        className="questions-container"
+        style={{
+          border: "1px solid #ccc",
+          background: "#fff",
+          padding: "15px",
+          borderRadius: "5px",
+        }}
+      >
+        {!selectedExam || !selectedExam.question_sets ? (
+          <p>No question sets available.</p>
+        ) : (() => {
+            const currentSet = selectedExam.question_sets.find(
+              (set) => set.set_name === selectedSet
+            );
+            if (!currentSet || !currentSet.questions || currentSet.questions.length === 0) {
+              return <p>No questions available for this set.</p>;
+            }
+            return currentSet.questions.map((q, index) => (
+              <div key={q.question_id} className="mb-3">
+                <p style={{ marginBottom: "10px" }}>
+                  <strong>Q {index + 1}:</strong> {q.question_text}
+                </p>
+                <div className="d-flex flex-column mx-4" style={{ gap: "5px" }}>
+                  {q.options.map((option, optIndex) => {
+                    const label = String.fromCharCode(65 + optIndex);
+                    return (
+                      <div
+                        key={optIndex}
+                        className="d-flex align-items-center"
+                        style={{ gap: "15px" }}
+                      >
+                        <strong>{label}.</strong>
+                        <span style={{ marginLeft: "5px" }}>{option}</span>
+                        <Form.Check
+                          type="radio"
+                          name={`answer-${q.question_id}`}
+                          checked={currentSet.answers[q.question_id] === option}
+                          readOnly
+                          disabled
+                          style={{ margin: 0 }}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ));
+          })()}
       </div>
-    ))
-  )}
-</div>
 
       <div className="d-flex justify-content-end">
         <Button

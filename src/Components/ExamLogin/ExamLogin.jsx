@@ -220,7 +220,10 @@ const ExamLogin = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showModal, setShowModal] = useState(false); 
-  const [examActive, setExamActive] = useState(true); // New state to track exam status
+  const [examActive, setExamActive] = useState(true); 
+  const [timeLeft, setTimeLeft] = useState(60 * 60);
+  const [examEnded, setExamEnded] = useState(false);
+  const [showTimeUpModal, setShowTimeUpModal] = useState(false);
   const navigate = useNavigate();
 
   const enterFullScreen = () => {
@@ -256,10 +259,17 @@ const ExamLogin = () => {
     enterFullScreen();
   }, []);
 
+  // Redirect to login when exam is inactive
+  useEffect(() => {
+    if (!examActive) {
+      navigate("/", { replace: true });
+    }
+  }, [examActive, navigate]);
+
   // Protect the page and enforce redirect when exam is inactive
   useEffect(() => {
     if (!examActive) {
-      navigate("/Studentpagelogin", { replace: true });
+      navigate("/", { replace: true });
     }
   }, [examActive, navigate]);
 
@@ -279,6 +289,34 @@ const ExamLogin = () => {
     // Cleanup listener on unmount
     return () => window.removeEventListener("popstate", handleBackButton);
   }, [navigate]); // Removed examActive from dependencies to always redirect
+
+  // Set up countdown timer
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime > 0) {
+          return prevTime - 1;
+        } else {
+          clearInterval(timerId);
+          setExamEnded(true);
+          setShowTimeUpModal(true);
+          console.log("Time's up! Submitting answers:", selectedAnswers);
+          return 0;
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(timerId); // Cleanup on unmount
+  }, []);
+
+  // Format time in MM:SS
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes.toString().padStart(2, "0")}:${secs
+      .toString()
+      .padStart(2, "0")}`;
+  };
 
   const handleAnswerChange = (qId, option) => {
     setSelectedAnswers({ ...selectedAnswers, [qId]: option });
@@ -339,8 +377,8 @@ const ExamLogin = () => {
                 </p>
               </Col>
               <Col md={4} className="text-end exam-details">
-                <p className="fs-5">
-                  <strong>Duration:</strong> 100 Mins.
+              <p className="fs-5">
+                  <strong>Duration:</strong> {formatTime(timeLeft)}
                 </p>
                 <p className="fs-5">
                   <strong>Total Marks:</strong> 100
@@ -442,6 +480,31 @@ const ExamLogin = () => {
               Cancel
             </Button>
             <Button variant="primary" onClick={handleModalConfirm}>
+              OK
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        {/* Time's Up Modal */}
+        <Modal show={showTimeUpModal} onHide={() => {}} centered>
+          <Modal.Header>
+            <Modal.Title>Time's Up!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            The exam time has ended. Your answers have been automatically
+            submitted.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="primary"
+              onClick={() => {
+                setShowTimeUpModal(false);
+                setExamActive(false);
+                exitFullScreen();
+                navigate("/Studentpagelogin", { replace: true });
+                window.history.pushState(null, null, "/Studentpagelogin");
+              }}
+            >
               OK
             </Button>
           </Modal.Footer>

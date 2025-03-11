@@ -1,0 +1,19 @@
+
+.img-partner img {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+  }
+  
+  .owl-item.colored .img-partner img {
+    /* filter: contrast(150%) saturate(130%); */
+    filter: brightness(115%) contrast(110%) saturate(140%);
+  }
+  
+  .img-partner img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .owl-item {
+    transition: all 0.3s ease;
+  }
